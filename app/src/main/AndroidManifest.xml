@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Frogger2340Project"
         tools:targetApi="31">
         <activity
+            android:name=".GameScreen"
+            android:exported="false" />
+        <activity
             android:name=".PlayerConfig"
             android:exported="false" />
         <activity
