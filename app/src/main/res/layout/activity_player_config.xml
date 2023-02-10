@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
+    android:textColor="@color/white"
     tools:context=".PlayerConfig">
 
     <EditText
@@ -12,6 +14,7 @@
         android:layout_height="48dp"
         android:layout_marginEnd="150dp"
         android:layout_marginBottom="450dp"
+        android:background="@color/white"
         android:ems="10"
         android:hint="Enter Player Name"
         android:inputType="textPersonName"
@@ -19,5 +22,124 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="167dp"
+        tools:layout_editor_absoluteY="503dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="354dp"
+        android:layout_height="135dp"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="514dp">
+        android:textColor="@color/white"
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select your difficulty level:"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
+    </RadioGroup>
+
+    <RadioButton
+        android:id="@+id/Medium"
+        android:layout_width="91dp"
+        android:layout_height="50dp"
+        android:text="Medium"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup2"
+        app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup2"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup2" />
+
+    <RadioButton
+        android:id="@+id/Hard"
+        android:layout_width="79dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="Hard"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup2"
+        app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/Medium"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup2" />
+
+    <RadioButton
+        android:id="@+id/Easy"
+        android:layout_width="79dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="Easy"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup2"
+        app:layout_constraintEnd_toStartOf="@+id/Medium"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup2"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup2" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="113dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/greenFrog"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:srcCompat="@drawable/greenfrog" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="111dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/BlueFrog"
+        app:srcCompat="@drawable/bluefrog"
+        tools:layout_editor_absoluteY="199dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="112dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/purpleFrog"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:srcCompat="@drawable/purplefrog" />
+
+    <RadioButton
+        android:id="@+id/BlueFrog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/purpleFrog"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup4" />
+
+    <RadioButton
+        android:id="@+id/purpleFrog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/greenFrog"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup4" />
+
+    <RadioButton
+        android:id="@+id/greenFrog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup4"
+        tools:layout_editor_absoluteY="403dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup4"
+        android:layout_width="165dp"
+        android:layout_height="308dp"
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="165dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
