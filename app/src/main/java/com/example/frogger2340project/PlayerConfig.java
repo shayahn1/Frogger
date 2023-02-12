@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class PlayerConfig extends AppCompatActivity {
 
     EditText playerNameText;
-    String playerName;
+    static String playerName;
 
     String difficulty;
     String spriteSelected;
@@ -22,17 +22,17 @@ public class PlayerConfig extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.Easy:
                 if(checked) {
-                    difficulty = "E";
+                    difficulty = "Easy";
                 }
                 break;
             case R.id.Medium:
                 if(checked) {
-                    difficulty = "M";
+                    difficulty = "Medium";
                 }
                 break;
             case R.id.Hard:
                 if(checked) {
-                    difficulty = "H";
+                    difficulty = "Hard";
                 }
                 break;
         }
@@ -72,5 +72,9 @@ public class PlayerConfig extends AppCompatActivity {
             GameView gameView = new GameView(this, difficulty, spriteSelected);
             setContentView(gameView);
         }
+    }
+
+    public static String getPlayerName() {
+        return playerName;
     }
 }

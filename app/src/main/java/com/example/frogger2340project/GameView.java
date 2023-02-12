@@ -25,16 +25,18 @@ public class GameView extends View {
     Runnable runnable;
     Paint textPaint = new Paint();
     Paint healthPaint = new Paint();
-    float textSize = 120;
+    float textSize = 80;
     int lives;
-    int points;
+    int score;
     float frogX, frogY;
     static int deviceWidth, deviceHeight;
+    String globalDifficulty;
 
     public GameView(Context context, String difficulty, String spriteSelected) {
         super(context);
         this.context = context;
         background = BitmapFactory.decodeResource(getResources(), R.drawable.game_screen);
+        globalDifficulty = difficulty;
         switch(spriteSelected) {
             case "G":
                 frog = BitmapFactory.decodeResource(getResources(), R.drawable.greenfrog);
@@ -62,15 +64,25 @@ public class GameView extends View {
         textPaint.setTextSize(textSize);
         textPaint.setTextAlign(Paint.Align.LEFT);
         healthPaint.setColor(Color.GREEN);
-        frogX = deviceWidth / 2 - frog.getWidth() / 2;
-        frogY = deviceHeight - frog.getHeight();
+        frogX = deviceWidth / 2;
+        frogY = deviceHeight;
     }
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawBitmap(background, null, rectBackground, null);
         canvas.drawBitmap(frog, frogX, frogY, null);
-        canvas.drawText("" + lives, 20, textSize, textPaint);
+        if (globalDifficulty.equals("Easy")) {
+            lives = 1;
+        } else if (globalDifficulty.equals("Medium")) {
+            lives = 2;
+        } else {
+            lives = 3;
+        }
+        canvas.drawText("Mode: " + globalDifficulty, 20, textSize, textPaint);
+        canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
+        canvas.drawText("Score: " + score, deviceWidth / 2, textSize * 2, textPaint);
+        canvas.drawText(PlayerConfig.getPlayerName(), 20, textSize * 2, textPaint);
         handler.postDelayed(runnable, UPDATE_MILLIS);
     }
 }
