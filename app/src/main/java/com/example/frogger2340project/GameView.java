@@ -80,7 +80,7 @@ public class GameView extends View {
         } else {
             lives = 3;
         }
-        canvas.drawText("Mode: " + globalDifficulty, 20, textSize, textPaint);
+        canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
         canvas.drawText("Score: " + score, deviceWidth / 2, textSize * 2, textPaint);
         canvas.drawText(PlayerConfig.getPlayerName(), 20, textSize * 2, textPaint);
