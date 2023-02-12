@@ -48,6 +48,7 @@ public class GameView extends View {
                 frog = BitmapFactory.decodeResource(getResources(), R.drawable.purplefrog);
                 break;
         }
+        frog = Bitmap.createScaledBitmap(frog, frog.getWidth() * 2,frog.getHeight() * 2, false);
         Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -65,7 +66,7 @@ public class GameView extends View {
         textPaint.setTextAlign(Paint.Align.LEFT);
         healthPaint.setColor(Color.GREEN);
         frogX = deviceWidth / 2;
-        frogY = deviceHeight;
+        frogY = deviceHeight / 2;
     }
 
     protected void onDraw(Canvas canvas) {
