@@ -69,7 +69,7 @@ public class PlayerConfig extends AppCompatActivity {
         playerNameText = findViewById(R.id.playerName);
         playerName = playerNameText.getText().toString();
         if (difficulty != null && spriteSelected != null && !playerName.isEmpty() && playerName != null && !playerName.trim().isEmpty()) {
-            GameView gameView = new GameView(this);
+            GameView gameView = new GameView(this, difficulty, spriteSelected);
             setContentView(gameView);
         }
     }
