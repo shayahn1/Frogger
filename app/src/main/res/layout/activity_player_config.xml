@@ -1,23 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlayerConfig">
+    android:textColor="@color/white"
+    android:background="@color/black"
+    tools:context=".PlayerConfig"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/playerName"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="450dp"
+        android:background="@color/white"
         android:ems="10"
         android:hint="Enter Player Name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="50dp"
+        android:inputType="textPersonName" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Your Difficulty Level:"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:layout_marginTop="50dp"/>
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/Easy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy"
+            android:textColor="@color/white"
+            android:onClick="onDifficultyButtonClicked" />
+
+        <RadioButton
+            android:id="@+id/Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium"
+            android:textColor="@color/white"
+            android:onClick="onDifficultyButtonClicked" />
+
+        <RadioButton
+            android:id="@+id/Hard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hard"
+            android:textColor="@color/white"
+            android:onClick="onDifficultyButtonClicked" />
+
+    </RadioGroup>
+    <TextView
+        android:id="@+id/spriteTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Your Sprite:"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:layout_marginTop="50dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/frogSelect">
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/greenFrog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="onSpriteClicked"/>
+
+            <RadioButton
+                android:id="@+id/purpleFrog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:onClick="onSpriteClicked"/>
+
+            <RadioButton
+                android:id="@+id/blueFrog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:onClick="onSpriteClicked"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="113dp"
+                android:layout_height="89dp"
+                app:srcCompat="@drawable/greenfrog" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="111dp"
+                android:layout_height="88dp"
+                app:srcCompat="@drawable/bluefrog" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="112dp"
+                android:layout_height="88dp"
+                app:srcCompat="@drawable/purplefrog" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Confirm"
+        android:onClick="startGame"
+        />
+
+
+</LinearLayout>
