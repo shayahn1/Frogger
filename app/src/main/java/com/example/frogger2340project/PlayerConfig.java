@@ -5,57 +5,59 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 public class PlayerConfig extends AppCompatActivity {
 
-    EditText playerNameText;
-    static String playerName;
+    private EditText playerNameText;
+    private static String playerName;
 
-    String difficulty;
-    String spriteSelected;
+    private String difficulty;
+    private String spriteSelected;
 
     public void onDifficultyButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.Easy:
-                if(checked) {
-                    difficulty = "Easy";
-                }
-                break;
-            case R.id.Medium:
-                if(checked) {
-                    difficulty = "Medium";
-                }
-                break;
-            case R.id.Hard:
-                if(checked) {
-                    difficulty = "Hard";
-                }
-                break;
+        switch (view.getId()) {
+        case R.id.Easy:
+            if (checked) {
+                difficulty = "Easy";
+            }
+            break;
+        case R.id.Medium:
+            if (checked) {
+                difficulty = "Medium";
+            }
+            break;
+        case R.id.Hard:
+            if (checked) {
+                difficulty = "Hard";
+            }
+            break;
+        default:
+            difficulty = null;
         }
     }
 
     public void onSpriteClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
-        switch(view.getId()) {
-            case R.id.greenFrog:
-                if(checked) {
-                    spriteSelected = "G";
-                }
-                break;
-            case R.id.blueFrog:
-                if(checked) {
-                    spriteSelected = "B";
-                }
-                break;
-            case R.id.purpleFrog:
-                if(checked) {
-                    spriteSelected = "P";
-                }
-                break;
+        switch (view.getId()) {
+        case R.id.greenFrog:
+            if (checked) {
+                spriteSelected = "G";
+            }
+            break;
+        case R.id.blueFrog:
+            if (checked) {
+                spriteSelected = "P";
+            }
+            break;
+        case R.id.purpleFrog:
+            if (checked) {
+                spriteSelected = "B";
+            }
+            break;
+        default:
+            spriteSelected = null;
         }
     }
 
@@ -68,7 +70,8 @@ public class PlayerConfig extends AppCompatActivity {
     public void startGame(View view) {
         playerNameText = findViewById(R.id.playerName);
         playerName = playerNameText.getText().toString();
-        if (difficulty != null && spriteSelected != null && !playerName.isEmpty() && playerName != null && !playerName.trim().isEmpty()) {
+        if (difficulty != null && spriteSelected != null && !playerName.isEmpty()
+                && playerName != null && !playerName.trim().isEmpty()) {
             GameView gameView = new GameView(this, difficulty, spriteSelected);
             setContentView(gameView);
         }
