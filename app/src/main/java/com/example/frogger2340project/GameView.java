@@ -74,11 +74,11 @@ public class GameView extends View {
         canvas.drawBitmap(background, null, rectBackground, null);
         canvas.drawBitmap(frog, frogX, frogY, null);
         if (globalDifficulty.equals("Easy")) {
-            lives = 1;
+            lives = 3;
         } else if (globalDifficulty.equals("Medium")) {
             lives = 2;
         } else {
-            lives = 3;
+            lives = 1;
         }
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
