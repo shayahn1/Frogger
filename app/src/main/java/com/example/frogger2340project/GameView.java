@@ -13,48 +13,51 @@ import android.os.Handler;
 import android.view.Display;
 import android.view.View;
 
-import androidx.core.content.res.ResourcesCompat;
-
 public class GameView extends View {
 
-    Bitmap background, frog;
-    Rect rectBackground;
-    Context context;
-    Handler handler;
-    final long UPDATE_MILLIS = 30;
-    Runnable runnable;
-    Paint textPaint = new Paint();
-    Paint healthPaint = new Paint();
-    float textSize = 80;
-    int lives;
-    int score;
-    float frogX, frogY;
-    static int deviceWidth, deviceHeight;
-    String globalDifficulty;
+    private Bitmap background;
+    private Bitmap frog;
+    private Rect rectBackground;
+    private Context context;
+    private Handler handler;
+    private final long updateMillis = 30;
+    private Runnable runnable;
+    private Paint textPaint = new Paint();
+    private Paint healthPaint = new Paint();
+    private float textSize = 80;
+    private int lives;
+    private int score;
+    private float frogX;
+    private float frogY;
+    private static int deviceWidth;
+    private static int deviceHeight;
+    private String globalDifficulty;
 
     public GameView(Context context, String difficulty, String spriteSelected) {
         super(context);
         this.context = context;
         background = BitmapFactory.decodeResource(getResources(), R.drawable.game_screen);
         globalDifficulty = difficulty;
-        switch(spriteSelected) {
-            case "G":
-                frog = BitmapFactory.decodeResource(getResources(), R.drawable.greenfrog);
-                break;
-            case "B":
-                frog = BitmapFactory.decodeResource(getResources(), R.drawable.bluefrog);
-                break;
-            case "P":
-                frog = BitmapFactory.decodeResource(getResources(), R.drawable.purplefrog);
-                break;
+        switch (spriteSelected) {
+        case "G":
+            frog = BitmapFactory.decodeResource(getResources(), R.drawable.greenfrog);
+            break;
+        case "B":
+            frog = BitmapFactory.decodeResource(getResources(), R.drawable.bluefrog);
+            break;
+        case "P":
+            frog = BitmapFactory.decodeResource(getResources(), R.drawable.purplefrog);
+            break;
+        default:
+            break;
         }
-        frog = Bitmap.createScaledBitmap(frog, frog.getWidth() * 2,frog.getHeight() * 2, false);
+        frog = Bitmap.createScaledBitmap(frog, frog.getWidth() * 2, frog.getHeight() * 2, false);
         Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         deviceWidth = size.x;
         deviceHeight = size.y;
-        rectBackground = new Rect(0,0, deviceWidth, deviceHeight);
+        rectBackground = new Rect(0, 0, deviceWidth, deviceHeight);
         handler = new Handler();
         runnable = new Runnable() {
             public void run() {
@@ -65,8 +68,8 @@ public class GameView extends View {
         textPaint.setTextSize(textSize);
         textPaint.setTextAlign(Paint.Align.LEFT);
         healthPaint.setColor(Color.GREEN);
-        frogX = deviceWidth / 2;
-        frogY = deviceHeight / 2;
+        frogX = deviceWidth / 2 - frog.getWidth() / 2;
+        frogY = deviceHeight - 200 - frog.getHeight() / 2;
     }
 
     protected void onDraw(Canvas canvas) {
@@ -84,6 +87,6 @@ public class GameView extends View {
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
         canvas.drawText("Score: " + score, deviceWidth / 2, textSize * 2, textPaint);
         canvas.drawText(PlayerConfig.getPlayerName(), 20, textSize * 2, textPaint);
-        handler.postDelayed(runnable, UPDATE_MILLIS);
+        handler.postDelayed(runnable, updateMillis);
     }
 }
