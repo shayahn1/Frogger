@@ -40,20 +40,24 @@ public class PlayerConfig extends AppCompatActivity {
 
     public void onSpriteClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
+        playerNameText = findViewById(R.id.playerName);
         switch (view.getId()) {
         case R.id.greenFrog:
             if (checked) {
                 spriteSelected = "G";
+                //playerNameText.setFocusable(false);
             }
             break;
         case R.id.blueFrog:
             if (checked) {
                 spriteSelected = "P";
+                //playerNameText.setFocusable(false);
             }
             break;
         case R.id.purpleFrog:
             if (checked) {
                 spriteSelected = "B";
+                //playerNameText.setFocusable(false);
             }
             break;
         default:
