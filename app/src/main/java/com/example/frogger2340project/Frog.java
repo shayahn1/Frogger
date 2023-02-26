@@ -24,32 +24,24 @@ public class Frog {
 
     public void moveFrogUp(float newFrogY) {
         if (newFrogY < 260) {
-            //frogY = 260;
             this.setFrogY(260);
         } else {
-            //frogY = newFrogY;
             this.setFrogY(newFrogY);
         }
     }
 
     public void moveFrogDown(float newFrogY) {
         if (newFrogY > 1736) {
-            //frogY = 1736;
             this.setFrogY(1736);
-        }
-        else {
-            //frogY = newFrogY;
+        } else {
             this.setFrogY(newFrogY);
         }
     }
 
     public void moveFrogRight(float newFrogX) {
         if (newFrogX > 969) {
-            //frogX = 969;
             this.setFrogX(969);
-        }
-        else {
-            //frogX = newFrogX;
+        } else {
             this.setFrogX(newFrogX);
         }
     }
@@ -57,8 +49,7 @@ public class Frog {
     public void moveFrogLeft(float newFrogX) {
         if (newFrogX < 33) {
             this.setFrogX(33);
-        }
-        else {
+        } else {
             this.setFrogX(newFrogX);
         }
     }

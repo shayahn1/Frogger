@@ -1,11 +1,11 @@
 package com.example.frogger2340project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PlayerConfig extends AppCompatActivity {
 
@@ -45,19 +45,16 @@ public class PlayerConfig extends AppCompatActivity {
         case R.id.greenFrog:
             if (checked) {
                 spriteSelected = "G";
-                //playerNameText.setFocusable(false);
             }
             break;
         case R.id.blueFrog:
             if (checked) {
                 spriteSelected = "P";
-                //playerNameText.setFocusable(false);
             }
             break;
         case R.id.purpleFrog:
             if (checked) {
                 spriteSelected = "B";
-                //playerNameText.setFocusable(false);
             }
             break;
         default:
@@ -74,30 +71,27 @@ public class PlayerConfig extends AppCompatActivity {
     public void startGame(View view) {
         playerNameText = findViewById(R.id.playerName);
         playerName = playerNameText.getText().toString();
-        if (isValidDifficulty(difficulty) && isValidSprite(spriteSelected) &&
-                checkNullName(playerName) && checkWhitespaceName(playerName)
+        if (isValidDifficulty(difficulty) && isValidSprite(spriteSelected)
+                && checkNullName(playerName) && checkWhitespaceName(playerName)
                 && checkEmptyName(playerName)) {
             GameView gameView = new GameView(this, difficulty, spriteSelected);
             setContentView(gameView);
         }
     }
 
-    /*public boolean validateDifficulty(String difficulty) {
-        return difficulty != null;
-    }
-
-     */
     public static boolean isValidDifficulty(String difficulty) {
-        return ((difficulty != null) && ((difficulty == "Easy") || (difficulty == "Medium")
-                    || (difficulty == "Hard")));
+        return difficulty != null && ((difficulty.equals("Easy")) || (difficulty.equals("Medium"))
+                || (difficulty.equals("Hard")));
     }
 
     public static boolean isValidSprite(String spriteSelected) {
-        return spriteSelected != null;
+        return spriteSelected != null && ((spriteSelected.equals("G"))
+                || (spriteSelected.equals("P"))
+                || (spriteSelected.equals("B")));
     }
 
     public static boolean isValidName(String playerName) {
-        return (playerName != null) & (!playerName.isEmpty()) && (!playerName.trim().isEmpty());
+        return (playerName != null) && (!playerName.isEmpty()) && (!playerName.trim().isEmpty());
     }
     public static boolean checkNullName(String playerName) {
         return playerName != null;
