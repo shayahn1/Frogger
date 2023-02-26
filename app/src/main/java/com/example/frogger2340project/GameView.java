@@ -11,6 +11,8 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.view.Display;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class GameView extends View {
@@ -28,6 +30,8 @@ public class GameView extends View {
     private int lives;
     private int score;
     private float frogX;
+    private float oldFrogX;
+    private float oldX;
     private float frogY;
     private static int deviceWidth;
     private static int deviceHeight;
@@ -89,4 +93,82 @@ public class GameView extends View {
         canvas.drawText(PlayerConfig.getPlayerName(), 20, textSize * 2, textPaint);
         handler.postDelayed(runnable, updateMillis);
     }
+
+    public boolean onTouchEvent(MotionEvent event) {
+        float touchX = event.getX();
+        float touchY = event.getY();
+        if (touchY < frogY) {
+            int action = event.getAction();
+            if (action == MotionEvent.ACTION_DOWN) {
+                float newFrogY = frogY - frog.getHeight();
+                if (newFrogY < 260) {
+                    frogY = 260;
+                } else {
+                    frogY = newFrogY;
+                }
+            }
+        }
+        else if (touchY > frogY + frog.getHeight()) {
+            int action = event.getAction();
+            if (action == MotionEvent.ACTION_DOWN) {
+                float newFrogY = frogY + frog.getHeight();
+                if (newFrogY > 1736) {
+                    frogY = 1736;
+                }
+                else {
+                    frogY = newFrogY;
+                }
+            }
+        }
+        else if (touchX > frogX + frog.getWidth()) {
+            int action = event.getAction();
+            if (action == MotionEvent.ACTION_DOWN) {
+                float newFrogX = frogX + frog.getWidth();
+                if (newFrogX > 969) {
+                    frogX = 969;
+                }
+                else {
+                    frogX = newFrogX;
+                }
+            }
+        }
+        else if (touchX < frogX) {
+            int action = event.getAction();
+            if (action == MotionEvent.ACTION_DOWN) {
+                float newFrogX = frogX - frog.getWidth();
+                if (newFrogX < 33) {
+                    frogX = 33;
+                }
+                else {
+                    frogX = newFrogX;
+                }
+            }
+        }
+        return true;
+    }
+
+//    public boolean onTouchEvent(MotionEvent event) {
+//        float touchX = event.getX();
+//        float touchY = event.getY();
+//        if (touchY <= frogY) {
+//            int action = event.getAction();
+//            if (action == MotionEvent.ACTION_DOWN) {
+//                oldX = event.getX();
+//                oldFrogX = frogX;
+//            }
+//            if (action == MotionEvent.ACTION_MOVE) {
+//                float shift = oldX - touchX;
+//                float newFrogX = oldX - shift;
+//                if (newFrogX <= 0) {
+//                    frogX = 0;
+//                }
+//                else if (newFrogX >= deviceWidth - frog.getWidth()) {
+//                    frogX = deviceWidth - frog.getWidth();
+//                } else {
+//                    frogX = newFrogX;
+//                }
+//            }
+//        }
+//        return true;
+//    }
 }
