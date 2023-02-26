@@ -89,4 +89,8 @@ public class GameView extends View {
         canvas.drawText(PlayerConfig.getPlayerName(), 20, textSize * 2, textPaint);
         handler.postDelayed(runnable, updateMillis);
     }
+
+    public String getGlobalDifficulty() {
+        return globalDifficulty;
+    }
 }
