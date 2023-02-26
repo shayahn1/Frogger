@@ -1,8 +1,8 @@
 package com.example.frogger2340project;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 
@@ -10,7 +10,9 @@ public class PlayerConfigTest {
 
     @Test
     public void checkDifficultyValidationSuccess() {
+        assertTrue(PlayerConfig.isValidDifficulty("Easy"));
         assertTrue(PlayerConfig.isValidDifficulty("Medium"));
+        assertTrue(PlayerConfig.isValidDifficulty("Hard"));
     }
 
     @Test
@@ -45,5 +47,22 @@ public class PlayerConfigTest {
     @Test
     public void checkNameValidationFailureEmpty() {
         assertFalse(PlayerConfig.isValidName(""));
+    }
+
+    @Test
+    public void checkSpriteValidationSuccess() {
+        assertTrue(PlayerConfig.isValidSprite("G"));
+        assertTrue(PlayerConfig.isValidSprite("B"));
+        assertTrue(PlayerConfig.isValidSprite("P"));
+    }
+
+    @Test
+    public void checkSpriteValidationFailureNull() {
+        assertFalse(PlayerConfig.isValidSprite(null));
+    }
+
+    @Test
+    public void checkSpriteValidationFailureInvalid() {
+        assertFalse(PlayerConfig.isValidSprite("R"));
     }
 }

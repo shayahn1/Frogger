@@ -11,7 +11,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.view.Display;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -29,14 +28,12 @@ public class GameView extends View {
     private float textSize = 80;
     private int lives;
     private int score;
-    //private float frogX;
     private float oldFrogX;
     private float oldX;
-    //private float frogY;
     private static int deviceWidth;
     private static int deviceHeight;
     private String globalDifficulty;
-    Frog newFrog; // new Frog(deviceWidth / 2 - frog.getWidth() / 2, deviceHeight - 200 - frog.getHeight() / 2);
+    private Frog newFrog;
 
     public GameView(Context context, String difficulty, String spriteSelected) {
         super(context);
@@ -73,9 +70,8 @@ public class GameView extends View {
         textPaint.setTextSize(textSize);
         textPaint.setTextAlign(Paint.Align.LEFT);
         healthPaint.setColor(Color.GREEN);
-        //frogX = deviceWidth / 2 - frog.getWidth() / 2;
-        //frogY = deviceHeight - 200 - frog.getHeight() / 2;
-        newFrog = new Frog(deviceWidth / 2 - frog.getWidth() / 2, deviceHeight - 200 - frog.getHeight() / 2);
+        newFrog = new Frog(deviceWidth / 2 - frog.getWidth() / 2,
+                deviceHeight - 200 - frog.getHeight() / 2);
     }
 
     protected void onDraw(Canvas canvas) {
@@ -109,22 +105,19 @@ public class GameView extends View {
                 float newFrogY = newFrog.getFrogY() - frog.getHeight();
                 newFrog.moveFrogUp(newFrogY);
             }
-        }
-        else if (touchY > newFrog.getFrogY() + frog.getHeight()) {
+        } else if (touchY > newFrog.getFrogY() + frog.getHeight()) {
             int action = event.getAction();
             if (action == MotionEvent.ACTION_DOWN) {
                 float newFrogY = newFrog.getFrogY() + frog.getHeight();
                 newFrog.moveFrogDown(newFrogY);
             }
-        }
-        else if (touchX > newFrog.getFrogX() + frog.getWidth()) {
+        } else if (touchX > newFrog.getFrogX() + frog.getWidth()) {
             int action = event.getAction();
             if (action == MotionEvent.ACTION_DOWN) {
                 float newFrogX = newFrog.getFrogX() + frog.getWidth();
                 newFrog.moveFrogRight(newFrogX);
             }
-        }
-        else if (touchX < newFrog.getFrogX()) {
+        } else if (touchX < newFrog.getFrogX()) {
             int action = event.getAction();
             if (action == MotionEvent.ACTION_DOWN) {
                 float newFrogX = newFrog.getFrogX() - frog.getWidth();
