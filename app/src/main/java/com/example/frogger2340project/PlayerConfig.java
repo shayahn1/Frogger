@@ -1,11 +1,11 @@
 package com.example.frogger2340project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PlayerConfig extends AppCompatActivity {
 
@@ -80,4 +80,6 @@ public class PlayerConfig extends AppCompatActivity {
     public static String getPlayerName() {
         return playerName;
     }
+
+    public String getDifficulty() {return difficulty;}
 }
