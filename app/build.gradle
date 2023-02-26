@@ -48,6 +48,7 @@ android {
         implementation "com.google.android.material:material:$rootProject.materialVersion"
 
         // Testing
+        testImplementation 'org.mockito:mockito-core:5.1.1'
         testImplementation "junit:junit:$rootProject.junitVersion"
         androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
         androidTestImplementation ("androidx.test.espresso:espresso-core:$rootProject.espressoVersion", {

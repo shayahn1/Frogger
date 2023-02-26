@@ -96,6 +96,10 @@ public class GameView extends View {
         handler.postDelayed(runnable, updateMillis);
     }
 
+    public String getGlobalDifficulty() {
+        return globalDifficulty;
+    }
+
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
         float touchY = event.getY();

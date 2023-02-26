@@ -74,12 +74,41 @@ public class PlayerConfig extends AppCompatActivity {
     public void startGame(View view) {
         playerNameText = findViewById(R.id.playerName);
         playerName = playerNameText.getText().toString();
-        if (difficulty != null && spriteSelected != null && !playerName.isEmpty()
-                && playerName != null && !playerName.trim().isEmpty()) {
-            playerNameText.setEnabled(false);
+        if (isValidDifficulty(difficulty) && isValidSprite(spriteSelected) &&
+                checkNullName(playerName) && checkWhitespaceName(playerName)
+                && checkEmptyName(playerName)) {
             GameView gameView = new GameView(this, difficulty, spriteSelected);
             setContentView(gameView);
         }
+    }
+
+    /*public boolean validateDifficulty(String difficulty) {
+        return difficulty != null;
+    }
+
+     */
+    public static boolean isValidDifficulty(String difficulty) {
+        return ((difficulty != null) && ((difficulty == "Easy") || (difficulty == "Medium")
+                    || (difficulty == "Hard")));
+    }
+
+    public static boolean isValidSprite(String spriteSelected) {
+        return spriteSelected != null;
+    }
+
+    public static boolean isValidName(String playerName) {
+        return (playerName != null) & (!playerName.isEmpty()) && (!playerName.trim().isEmpty());
+    }
+    public static boolean checkNullName(String playerName) {
+        return playerName != null;
+    }
+
+    public static boolean checkEmptyName(String playerName) {
+        return !playerName.isEmpty();
+    }
+
+    public static boolean checkWhitespaceName(String playerName) {
+        return !playerName.trim().isEmpty();
     }
 
     public static String getPlayerName() {
