@@ -15,6 +15,8 @@ public class CreateFrogTest {
         frog1 = new Frog();
         frog2 = new Frog(500, 400);
     }
+
+    //Aidan Pek
     @Test
     public void testCreateFrog() {
         assertEquals(frog1.getFrogX(), 0, 0);
@@ -22,6 +24,8 @@ public class CreateFrogTest {
         assertEquals(frog2.getFrogX(), 500, 0);
         assertEquals(frog2.getFrogY(), 400, 0);
     }
+
+    //Aidan Pek
     @Test
     public void testMoveFrogUp() {
         frog2.moveFrogUp(300);
@@ -29,6 +33,8 @@ public class CreateFrogTest {
         frog2.moveFrogUp(1500);
         assertEquals(frog2.getFrogY(), 1500, 0);
     }
+
+    //Aidan Pek
     @Test
     public void testMoveFrogDown() {
         frog1.moveFrogDown(800);
@@ -37,6 +43,7 @@ public class CreateFrogTest {
         assertEquals(frog1.getFrogY(), 300, 0);
     }
 
+    //Laltih Siripurapu
     @Test
     public void testMoveFrogLeft() {
         frog2.moveFrogLeft(100);
@@ -45,6 +52,7 @@ public class CreateFrogTest {
         assertEquals(frog2.getFrogX(), 500, 0);
     }
 
+    //Laltih Siripurapu
     @Test
     public void testMoveFrogRight() {
         frog1.moveFrogRight(600);
@@ -53,6 +61,7 @@ public class CreateFrogTest {
         assertEquals(frog1.getFrogX(), 100, 0);
     }
 
+    //Shayahn Mirfendereski
     @Test
     public void testFrogBoundaryUp() {
         frog2.moveFrogUp(0);
@@ -60,6 +69,7 @@ public class CreateFrogTest {
         assertEquals(frog2.getFrogY(), 260, 0);
     }
 
+    //Shayahn Mirfendereski
     @Test
     public void testFrogBoundaryDown() {
         frog1.moveFrogDown(2000);
@@ -67,6 +77,7 @@ public class CreateFrogTest {
         assertEquals(frog1.getFrogY(), 1736, 0);
     }
 
+    //Shayahn Mirfendereski
     @Test
     public void testFrogBoundaryLeft() {
         frog2.moveFrogLeft(0);
@@ -74,6 +85,7 @@ public class CreateFrogTest {
         assertEquals(frog2.getFrogX(), 33, 0);
     }
 
+    //Shayahn Mirfendereski
     @Test
     public void testFrogBoundaryRight() {
         frog1.moveFrogRight(1000);
