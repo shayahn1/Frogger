@@ -78,13 +78,7 @@ public class GameView extends View {
         super.onDraw(canvas);
         canvas.drawBitmap(background, null, rectBackground, null);
         canvas.drawBitmap(frog, newFrog.getFrogX(), newFrog.getFrogY(), null);
-        if (globalDifficulty.equals("Easy")) {
-            lives = 3;
-        } else if (globalDifficulty.equals("Medium")) {
-            lives = 2;
-        } else {
-            lives = 1;
-        }
+        lives = livesCount(globalDifficulty);
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
         canvas.drawText("Score: " + score, deviceWidth / 2, textSize * 2, textPaint);
@@ -125,5 +119,15 @@ public class GameView extends View {
             }
         }
         return true;
+    }
+
+    public static int livesCount(String difficulty) {
+        if (difficulty.equals("Easy")) {
+            return 3;
+        } else if (difficulty.equals("Medium")) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 }
