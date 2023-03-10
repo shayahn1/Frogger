@@ -29,7 +29,7 @@ public class GameView extends View {
     private Paint healthPaint = new Paint();
     private float textSize = 80;
     private int lives;
-    private int score;
+    private static int score;
     private float oldFrogX;
     private float oldX;
     private static int deviceWidth;
