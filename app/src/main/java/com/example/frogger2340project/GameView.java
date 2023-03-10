@@ -11,7 +11,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.view.Display;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -30,11 +29,9 @@ public class GameView extends View {
     private Paint healthPaint = new Paint();
     private float textSize = 80;
     private int lives;
-    private static int score;
-    //private float frogX;
+    private int score;
     private float oldFrogX;
     private float oldX;
-    //private float frogY;
     private static int deviceWidth;
     private static int deviceHeight;
     private String globalDifficulty;
@@ -42,12 +39,9 @@ public class GameView extends View {
     private ArrayList<MediumCar> mediumCars;
     private ArrayList<LargeCar> largeCars;
     private float maxHeight = 50000.0f;
-    Frog newFrog; // new Frog(deviceWidth / 2 - frog.getWidth() / 2, deviceHeight - 200 - frog.getHeight() / 2);
+    private Frog newFrog;
 
     public GameView(Context context, String difficulty, String spriteSelected) {
-        super(context);
-        this.context = context;
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.game_screen);
         globalDifficulty = difficulty;
         switch (spriteSelected) {
         case "G":
@@ -138,13 +132,7 @@ public class GameView extends View {
                 lives--;
             }
         }
-        if (globalDifficulty.equals("Easy")) {
-            lives = 3;
-        } else if (globalDifficulty.equals("Medium")) {
-            lives = 2;
-        } else {
-            lives = 1;
-        }
+        lives = livesCount(globalDifficulty);
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
         canvas.drawText("Score: " + score, deviceWidth / 2, textSize * 2, textPaint);
@@ -169,22 +157,19 @@ public class GameView extends View {
                     incrementScore(newFrogY);
                 }
             }
-        }
-        else if (touchY > newFrog.getFrogY() + frog.getHeight()) {
+        } else if (touchY > newFrog.getFrogY() + frog.getHeight()) {
             int action = event.getAction();
             if (action == MotionEvent.ACTION_DOWN) {
                 float newFrogY = newFrog.getFrogY() + frog.getHeight() + 16;
                 newFrog.moveFrogDown(newFrogY);
             }
-        }
-        else if (touchX > newFrog.getFrogX() + frog.getWidth()) {
+        } else if (touchX > newFrog.getFrogX() + frog.getWidth()) {
             int action = event.getAction();
             if (action == MotionEvent.ACTION_DOWN) {
                 float newFrogX = newFrog.getFrogX() + frog.getWidth();
                 newFrog.moveFrogRight(newFrogX);
             }
-        }
-        else if (touchX < newFrog.getFrogX()) {
+        } else if (touchX < newFrog.getFrogX()) {
             int action = event.getAction();
             if (action == MotionEvent.ACTION_DOWN) {
                 float newFrogX = newFrog.getFrogX() - frog.getWidth();
@@ -214,5 +199,14 @@ public class GameView extends View {
 
     public static int getDeviceWidth() {
         return deviceWidth;
+    }
+    public static int livesCount(String difficulty) {
+        if (difficulty.equals("Easy")) {
+            return 3;
+        } else if (difficulty.equals("Medium")) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 }
