@@ -13,7 +13,7 @@ public class CreateFrogTest {
     @Before
     public void init() {
         frog1 = new Frog();
-        frog2 = new Frog(500, 400);
+        frog2 = new Frog(500, 400, 0);
     }
 
     //Aidan Pek
