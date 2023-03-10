@@ -76,7 +76,7 @@ public class GameView extends View {
         textPaint.setTextSize(textSize);
         textPaint.setTextAlign(Paint.Align.LEFT);
         healthPaint.setColor(Color.GREEN);
-        newFrog = new Frog(deviceWidth / 2 - frog.getWidth() / 2, deviceHeight - 206 - frog.getHeight() / 2);
+        newFrog = new Frog(deviceWidth / 2 - frog.getWidth() / 2, deviceHeight - 206 - frog.getHeight() / 2, 0);
         vehicles = new ArrayList<>();
         mediumCars = new ArrayList<>();
         largeCars = new ArrayList<>();
@@ -138,7 +138,7 @@ public class GameView extends View {
         lives = livesCount(globalDifficulty);
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
-        canvas.drawText("Score: " + score, deviceWidth / 2, textSize * 2, textPaint);
+        canvas.drawText("Score: " + newFrog.getScore(), deviceWidth / 2, textSize * 2, textPaint);
         canvas.drawText(PlayerConfig.getPlayerName(), 20, textSize * 2, textPaint);
         handler.postDelayed(runnable, updateMillis);
     }
@@ -155,10 +155,10 @@ public class GameView extends View {
             if (action == MotionEvent.ACTION_DOWN) {
                 float newFrogY = newFrog.getFrogY() - frog.getHeight() - 16;
                 newFrog.moveFrogUp(newFrogY);
-                if (newFrogY < maxHeight) {
-                    maxHeight = newFrogY;
-                    incrementScore(newFrogY);
-                }
+//                if (newFrogY < maxHeight) {
+//                    maxHeight = newFrogY;
+//                    incrementScore(newFrogY);
+//                }
             }
         } else if (touchY > newFrog.getFrogY() + frog.getHeight()) {
             int action = event.getAction();
@@ -182,23 +182,42 @@ public class GameView extends View {
         return true;
     }
 
-    public static void incrementScore(float frogY) {
-        int intVer = (int) frogY;
-        switch (intVer) {
-            case 1632: score += 10;
-                       break;
-            case 1534: score += 20;
-                       break;
-            case 1436: score += 30;
-                       break;
-            case 1338: score += 40;
-                       break;
-            case 1240: score += 50;
-                       break;
-            default: score += 5;
-
-        }
-    }
+//    public static void incrementScore(float frogY) {
+//        int intVer = (int) frogY;
+//        switch (intVer) {
+//            case 1632: score += 5;
+//                       break;
+//            case 1534: score += 10;
+//                       break;
+//            case 1436: score += 15;
+//                       break;
+//            case 1338: score += 20;
+//                       break;
+//            case 1240: score += 25;
+//                       break;
+//            case 1142: score += 30;
+//                       break;
+//            case 1044: score += 35;
+//                       break;
+//            case 946:  score += 40;
+//                       break;
+//            case 848:  score += 45;
+//                       break;
+//            case 750:  score += 50;
+//                       break;
+//            case 652:  score += 55;
+//                       break;
+//            case 554:  score += 60;
+//                       break;
+//            case 456:  score += 65;
+//                       break;
+//            case 358:  score += 70;
+//                       break;
+//            case 260:  score += 75;
+//                       break;
+//            default: break;
+//        }
+//    }
 
     public static int getDeviceWidth() {
         return deviceWidth;
