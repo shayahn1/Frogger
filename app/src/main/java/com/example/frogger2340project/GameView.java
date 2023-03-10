@@ -42,6 +42,9 @@ public class GameView extends View {
     private Frog newFrog;
 
     public GameView(Context context, String difficulty, String spriteSelected) {
+        super(context);
+        this.context = context;
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.game_screen);
         globalDifficulty = difficulty;
         switch (spriteSelected) {
         case "G":
