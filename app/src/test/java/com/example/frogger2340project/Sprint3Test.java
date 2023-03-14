@@ -56,42 +56,42 @@ public class Sprint3Test {
     @Test
     public void testCreateMediumCar() {
         mediumCar = new MediumCar(50, 60, 100);
-        assertEquals(50, mediumCar.vehicleX, 0);
-        assertEquals(60, mediumCar.vehicleY, 0);
-        assertEquals(100, mediumCar.vehicleVelocity, 0);
+        assertEquals(50, mediumCar.getVehicleX(), 0);
+        assertEquals(60, mediumCar.getVehicleY(), 0);
+        assertEquals(100, mediumCar.getVehicleVelocity(), 0);
     }
     @Test
     public void testVehicleVelocity() {
-        assertEquals(5, mediumCar.vehicleVelocity, 0);
+        assertEquals(5, mediumCar.getVehicleVelocity(), 0);
         mediumCar.resetPosition2(50);
-        assertEquals(10, mediumCar.vehicleVelocity, 0);
+        assertEquals(10, mediumCar.getVehicleVelocity(), 0);
         mediumCar.resetPosition2(50);
-        assertEquals(15, mediumCar.vehicleVelocity, 0);
+        assertEquals(15, mediumCar.getVehicleVelocity(), 0);
     }
 
     @Test
     public void testAcceleration() {
-        assertEquals(5, mediumCar.vehicleVelocity, 0);
+        assertEquals(5, mediumCar.getVehicleVelocity(), 0);
         for(int i = 0; i < 5; i++) {
             mediumCar.accelerate();
         }
-        assertEquals(10, mediumCar.vehicleVelocity, 0);
+        assertEquals(10, mediumCar.getVehicleVelocity(), 0);
     }
 
     @Test
     public void checkBoundsRight() {
-        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.vehicleX, 500));
-        assertEquals(true, GameView.checkOutOfBoundsMoveRight(mediumCar.vehicleX, 10));
-        mediumCar.vehicleX = 0;
-        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.vehicleX, 10));
+        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.getVehicleX(), 500));
+        assertEquals(true, GameView.checkOutOfBoundsMoveRight(mediumCar.getVehicleX(), 10));
+        mediumCar.setVehicleX(0);
+        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.getVehicleX(), 10));
     }
 
     @Test
     public void checkBoundsLeft() {
-        assertEquals(false, GameView.checkOutOfBoundsMoveLeft(mediumCar.vehicleX, 0));
-        assertEquals(true, GameView.checkOutOfBoundsMoveLeft(mediumCar.vehicleX, 100));
-        mediumCar.vehicleX = 200;
-        assertEquals(false, GameView.checkOutOfBoundsMoveLeft(mediumCar.vehicleX, 100));
+        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.getVehicleX(), 0));
+        assertEquals(true, GameView.checkOutOfBoundsMoveRight(mediumCar.getVehicleX(), 100));
+        mediumCar.setVehicleX(200);
+        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.getVehicleX(), 100));
     }
 
     @Test
