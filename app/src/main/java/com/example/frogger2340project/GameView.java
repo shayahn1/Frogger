@@ -64,11 +64,15 @@ public class GameView extends View {
         default:
             break;
         }
-        frog = Bitmap.createScaledBitmap(frog, frog.getWidth() * 2, frog.getHeight() * 2, false);
+        frog = Bitmap.createScaledBitmap(frog, frog.getWidth() * 2,
+                frog.getHeight() * 2, false);
         mediumCar2 = BitmapFactory.decodeResource(getResources(), R.drawable.mediumcar);
-        mediumCar2 = Bitmap.createScaledBitmap(mediumCar2, mediumCar2.getWidth() * 2, mediumCar2.getHeight() * 2, false);
+        mediumCar2 = Bitmap.createScaledBitmap(mediumCar2, mediumCar2.getWidth() * 2,
+                mediumCar2.getHeight() * 2, false);
         mediumCar2Back = BitmapFactory.decodeResource(getResources(), R.drawable.mediumcar);
-        mediumCar2Back = Bitmap.createScaledBitmap(mediumCar2Back, mediumCar2Back.getWidth() * 2, mediumCar2Back.getHeight() * 2, false);
+        mediumCar2Back = Bitmap.createScaledBitmap(mediumCar2Back,
+                mediumCar2Back.getWidth() * 2, mediumCar2Back.getHeight() * 2,
+                false);
         Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -85,21 +89,23 @@ public class GameView extends View {
         textPaint.setTextSize(textSize);
         textPaint.setTextAlign(Paint.Align.LEFT);
         healthPaint.setColor(Color.GREEN);
-        newFrog = new Frog(deviceWidth / 2 - frog.getWidth() / 2, deviceHeight - 206 - frog.getHeight() / 2, 0);
-        newMediumCar = new MediumCar(GameView.getDeviceWidth() + mediumCar2.getWidth(), 1338, 5);
+        newFrog = new Frog(deviceWidth / 2 - frog.getWidth() / 2,
+                deviceHeight - 206 - frog.getHeight() / 2, 0);
+        newMediumCar = new MediumCar(GameView.getDeviceWidth() + mediumCar2.getWidth(),
+                1338, 5);
         newMediumCar2 = new MediumCar(0 - mediumCar2Back.getWidth(), 1240, 1);
         vehicles = new ArrayList<>();
         mediumCars = new ArrayList<>();
         largeCars = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Vehicle vehicle = new Vehicle(context);
-            vehicle.vehicleX = 200*i;
+            vehicle.getVehicleX() = 200 * i;
             vehicles.add(vehicle);
             MediumCar medium = new MediumCar(context);
-            medium.vehicleX = 300*i;
+            medium.getVehicleX() = 300 * i;
             mediumCars.add(medium);
             LargeCar large = new LargeCar(context);
-            large.vehicleX = -(400*i);
+            large.getVehicleX() = -(400 * i);
             largeCars.add(large);
         }
     }
@@ -108,52 +114,58 @@ public class GameView extends View {
         super.onDraw(canvas);
         canvas.drawBitmap(background, null, rectBackground, null);
         canvas.drawBitmap(frog, newFrog.getFrogX(), newFrog.getFrogY(), null);
-        canvas.drawBitmap(mediumCar2, newMediumCar.vehicleX, newMediumCar.vehicleY, null);
-        canvas.drawBitmap(mediumCar2Back, newMediumCar2.vehicleX, newMediumCar2.vehicleY, null);
-        newMediumCar2.vehicleX += newMediumCar2.vehicleVelocity;
+        canvas.drawBitmap(mediumCar2, newMediumCar.getVehicleX(),
+                newMediumCar.getVehicleY(), null);
+        canvas.drawBitmap(mediumCar2Back, newMediumCar2.getVehicleX(),
+                newMediumCar2.getVehicleY(), null);
+        newMediumCar2.getVehicleX() += newMediumCar2.getVehicleVelocity();
         newMediumCar2.accelerate();
-        if (checkOutOfBoundsMoveRight(newMediumCar2.vehicleX, deviceWidth)) {
+        if (checkOutOfBoundsMoveRight(newMediumCar2.getVehicleX(), deviceWidth)) {
             newMediumCar2.resetPosition3(mediumCar2Back.getWidth());
         }
-        newMediumCar.vehicleX -= newMediumCar.vehicleVelocity;
-        if (checkOutOfBoundsMoveLeft(newMediumCar.vehicleX, 0 - mediumCar2.getWidth())) {
+        newMediumCar.getVehicleX() -= newMediumCar.getVehicleVelocity();
+        if (checkOutOfBoundsMoveLeft(newMediumCar.getVehicleX(), 0 - mediumCar2.getWidth())) {
             newMediumCar.resetPosition2(mediumCar2.getWidth());
         }
         for (int i = 0; i < vehicles.size(); i++) {
-            canvas.drawBitmap(vehicles.get(i).getCar(vehicles.get(i).vehicleFrame), vehicles.get(i).vehicleX, vehicles.get(i).vehicleY, null);
-            canvas.drawBitmap(mediumCars.get(i).getMediumCar(mediumCars.get(i).vehicleFrame), mediumCars.get(i).vehicleX, mediumCars.get(i).vehicleY, null);
-            canvas.drawBitmap(largeCars.get(i).getLargeCar(largeCars.get(i).vehicleFrame), largeCars.get(i).vehicleX, largeCars.get(i).vehicleY, null);
-            mediumCars.get(i).vehicleFrame++;
-            vehicles.get(i).vehicleFrame++;
-            largeCars.get(i).vehicleFrame++;
-            if (vehicles.get(i).vehicleFrame > 2) {
-                vehicles.get(i).vehicleFrame = 0;
+            canvas.drawBitmap(vehicles.get(i).getCar(vehicles.get(i).getVehicleFrame()),
+                    vehicles.get(i).getVehicleX(), vehicles.get(i).getVehicleY(), null);
+            canvas.drawBitmap(mediumCars.get(i).getMediumCar(mediumCars.get(i).getVehicleFrame()),
+                    mediumCars.get(i).getVehicleX(), mediumCars.get(i).getVehicleY(), null);
+            canvas.drawBitmap(largeCars.get(i).getLargeCar(largeCars.get(i).getVehicleFrame()),
+                    largeCars.get(i).getVehicleX(), largeCars.get(i).getVehicleY(), null);
+            mediumCars.get(i).setVehicleFrame(mediumCars.get(i).getVehicleFrame() + 1);
+            vehicles.get(i).setVehicleFrame(vehicles.get(i).getVehicleFrame() + 1);
+            largeCars.get(i).setVehicleFrame(largeCars.get(i).getVehicleFrame() + 1);
+            if (vehicles.get(i).getVehicleFrame() > 2) {
+                vehicles.get(i).getVehicleFrame() = 0;
             }
-            if (mediumCars.get(i).vehicleFrame > 2) {
-                mediumCars.get(i).vehicleFrame = 0;
+            if (mediumCars.get(i).getVehicleFrame() > 2) {
+                mediumCars.get(i).getVehicleFrame() = 0;
             }
-            if (largeCars.get(i).vehicleFrame > 2) {
-                largeCars.get(i).vehicleFrame = 0;
+            if (largeCars.get(i).getVehicleFrame() > 2) {
+                largeCars.get(i).getVehicleFrame() = 0;
             }
-            vehicles.get(i).vehicleX -= vehicles.get(i).vehicleVelocity;
-            mediumCars.get(i).vehicleX -= mediumCars.get(i).vehicleVelocity;
-            largeCars.get(i).vehicleX += largeCars.get(i).vehicleVelocity;
-            if (vehicles.get(i).vehicleX < 0 - vehicles.get(i).getCarWidth()) {
+            vehicles.get(i).getVehicleX() -= vehicles.get(i).getVehicleVelocity();
+            mediumCars.get(i).getVehicleX() -= mediumCars.get(i).getVehicleVelocity();
+            largeCars.get(i).getVehicleX() += largeCars.get(i).getVehicleVelocity();
+            if (vehicles.get(i).getVehicleX() < 0 - vehicles.get(i).getCarWidth()) {
                 vehicles.get(i).resetPosition();
             }
-            if (mediumCars.get(i).vehicleX < 0 - mediumCars.get(i).getMediumCarWidth()) {
+            if (mediumCars.get(i).getVehicleX() < 0 - mediumCars.get(i).getMediumCarWidth()) {
                 mediumCars.get(i).resetPosition();
             }
-            if (largeCars.get(i).vehicleX > deviceWidth) {
+            if (largeCars.get(i).getVehicleX() > deviceWidth) {
                 largeCars.get(i).resetPosition();
             }
         }
 
         for (int i = 0; i < vehicles.size(); i++) {
-            if (vehicles.get(i).vehicleX + vehicles.get(i).getCarWidth() >= newFrog.getFrogX()
-            && vehicles.get(i).vehicleX <= newFrog.getFrogX() //+ frog.getWidth()
-            && vehicles.get(i).vehicleY + vehicles.get(i).getCarHeight() >= newFrog.getFrogY()
-            && vehicles.get(i).vehicleY <= newFrog.getFrogY()) { //+ frog.getHeight() ) {
+            if (vehicles.get(i).getVehicleX() + vehicles.get(i).getCarWidth() >= newFrog.getFrogX()
+                    && vehicles.get(i).getVehicleX() <= newFrog.getFrogX() //+ frog.getWidth()
+                    && vehicles.get(i).getVehicleY() + vehicles.get(i).getCarHeight()
+                    >= newFrog.getFrogY()
+                    && vehicles.get(i).getVehicleY() <= newFrog.getFrogY()) { //+ frog.getHeight()
                 lives--;
             }
         }
@@ -214,10 +226,10 @@ public class GameView extends View {
     }
 
     public static boolean checkOutOfBoundsMoveRight(int current, int bounds) {
-        return current > bounds? true: false;
+        return current > bounds;
     }
 
     public static boolean checkOutOfBoundsMoveLeft(int current, int bounds) {
-        return current < bounds? true: false;
+        return current < bounds;
     }
 }
