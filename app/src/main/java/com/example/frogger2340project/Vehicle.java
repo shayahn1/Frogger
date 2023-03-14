@@ -11,8 +11,11 @@ public class Vehicle {
 
     public Vehicle(Context context) {
         vehicle[0] = BitmapFactory.decodeResource(context.getResources(), R.drawable.smallcar);
+        vehicle[0] = Bitmap.createScaledBitmap(vehicle[0], vehicle[0].getWidth() * 2, vehicle[0].getHeight() * 2, false);
         vehicle[1] = BitmapFactory.decodeResource(context.getResources(), R.drawable.smallcar);
+        vehicle[1] = Bitmap.createScaledBitmap(vehicle[1], vehicle[1].getWidth() * 2, vehicle[1].getHeight() * 2, false);
         vehicle[2] = BitmapFactory.decodeResource(context.getResources(), R.drawable.smallcar);
+        vehicle[2] = Bitmap.createScaledBitmap(vehicle[2], vehicle[2].getWidth() * 2, vehicle[2].getHeight() * 2, false);
         resetPosition();
     }
 

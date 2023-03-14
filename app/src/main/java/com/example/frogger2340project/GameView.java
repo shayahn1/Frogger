@@ -20,6 +20,8 @@ public class GameView extends View {
 
     private Bitmap background;
     private Bitmap frog;
+    private Bitmap mediumCar2;
+    private Bitmap mediumCar2Back;
     private Rect rectBackground;
     private Context context;
     private Handler handler;
@@ -38,8 +40,11 @@ public class GameView extends View {
     private ArrayList<Vehicle> vehicles;
     private ArrayList<MediumCar> mediumCars;
     private ArrayList<LargeCar> largeCars;
+    private ArrayList<MediumCar> mediumCars2;
     private float maxHeight = 50000.0f;
     private Frog newFrog;
+    private MediumCar newMediumCar;
+    private MediumCar newMediumCar2;
 
     public GameView(Context context, String difficulty, String spriteSelected) {
         super(context);
@@ -60,6 +65,10 @@ public class GameView extends View {
             break;
         }
         frog = Bitmap.createScaledBitmap(frog, frog.getWidth() * 2, frog.getHeight() * 2, false);
+        mediumCar2 = BitmapFactory.decodeResource(getResources(), R.drawable.mediumcar);
+        mediumCar2 = Bitmap.createScaledBitmap(mediumCar2, mediumCar2.getWidth() * 2, mediumCar2.getHeight() * 2, false);
+        mediumCar2Back = BitmapFactory.decodeResource(getResources(), R.drawable.mediumcar);
+        mediumCar2Back = Bitmap.createScaledBitmap(mediumCar2Back, mediumCar2Back.getWidth() * 2, mediumCar2Back.getHeight() * 2, false);
         Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -77,6 +86,8 @@ public class GameView extends View {
         textPaint.setTextAlign(Paint.Align.LEFT);
         healthPaint.setColor(Color.GREEN);
         newFrog = new Frog(deviceWidth / 2 - frog.getWidth() / 2, deviceHeight - 206 - frog.getHeight() / 2, 0);
+        newMediumCar = new MediumCar(GameView.getDeviceWidth() + mediumCar2.getWidth(), 1338, 5);
+        newMediumCar2 = new MediumCar(0 - mediumCar2Back.getWidth(), 1240, 1);
         vehicles = new ArrayList<>();
         mediumCars = new ArrayList<>();
         largeCars = new ArrayList<>();
@@ -97,6 +108,17 @@ public class GameView extends View {
         super.onDraw(canvas);
         canvas.drawBitmap(background, null, rectBackground, null);
         canvas.drawBitmap(frog, newFrog.getFrogX(), newFrog.getFrogY(), null);
+        canvas.drawBitmap(mediumCar2, newMediumCar.vehicleX, newMediumCar.vehicleY, null);
+        canvas.drawBitmap(mediumCar2Back, newMediumCar2.vehicleX, newMediumCar2.vehicleY, null);
+        newMediumCar2.vehicleX += newMediumCar2.vehicleVelocity;
+        newMediumCar2.accelerate();
+        if (checkOutOfBoundsMoveRight(newMediumCar2.vehicleX, deviceWidth)) {
+            newMediumCar2.resetPosition3(mediumCar2Back.getWidth());
+        }
+        newMediumCar.vehicleX -= newMediumCar.vehicleVelocity;
+        if (checkOutOfBoundsMoveLeft(newMediumCar.vehicleX, 0 - mediumCar2.getWidth())) {
+            newMediumCar.resetPosition2(mediumCar2.getWidth());
+        }
         for (int i = 0; i < vehicles.size(); i++) {
             canvas.drawBitmap(vehicles.get(i).getCar(vehicles.get(i).vehicleFrame), vehicles.get(i).vehicleX, vehicles.get(i).vehicleY, null);
             canvas.drawBitmap(mediumCars.get(i).getMediumCar(mediumCars.get(i).vehicleFrame), mediumCars.get(i).vehicleX, mediumCars.get(i).vehicleY, null);
@@ -116,10 +138,10 @@ public class GameView extends View {
             vehicles.get(i).vehicleX -= vehicles.get(i).vehicleVelocity;
             mediumCars.get(i).vehicleX -= mediumCars.get(i).vehicleVelocity;
             largeCars.get(i).vehicleX += largeCars.get(i).vehicleVelocity;
-            if (vehicles.get(i).vehicleX < 0) {
+            if (vehicles.get(i).vehicleX < 0 - vehicles.get(i).getCarWidth()) {
                 vehicles.get(i).resetPosition();
             }
-            if (mediumCars.get(i).vehicleX < 0) {
+            if (mediumCars.get(i).vehicleX < 0 - mediumCars.get(i).getMediumCarWidth()) {
                 mediumCars.get(i).resetPosition();
             }
             if (largeCars.get(i).vehicleX > deviceWidth) {
@@ -155,10 +177,6 @@ public class GameView extends View {
             if (action == MotionEvent.ACTION_DOWN) {
                 float newFrogY = newFrog.getFrogY() - frog.getHeight() - 16;
                 newFrog.moveFrogUp(newFrogY);
-//                if (newFrogY < maxHeight) {
-//                    maxHeight = newFrogY;
-//                    incrementScore(newFrogY);
-//                }
             }
         } else if (touchY > newFrog.getFrogY() + frog.getHeight()) {
             int action = event.getAction();
@@ -182,43 +200,6 @@ public class GameView extends View {
         return true;
     }
 
-//    public static void incrementScore(float frogY) {
-//        int intVer = (int) frogY;
-//        switch (intVer) {
-//            case 1632: score += 5;
-//                       break;
-//            case 1534: score += 10;
-//                       break;
-//            case 1436: score += 15;
-//                       break;
-//            case 1338: score += 20;
-//                       break;
-//            case 1240: score += 25;
-//                       break;
-//            case 1142: score += 30;
-//                       break;
-//            case 1044: score += 35;
-//                       break;
-//            case 946:  score += 40;
-//                       break;
-//            case 848:  score += 45;
-//                       break;
-//            case 750:  score += 50;
-//                       break;
-//            case 652:  score += 55;
-//                       break;
-//            case 554:  score += 60;
-//                       break;
-//            case 456:  score += 65;
-//                       break;
-//            case 358:  score += 70;
-//                       break;
-//            case 260:  score += 75;
-//                       break;
-//            default: break;
-//        }
-//    }
-
     public static int getDeviceWidth() {
         return deviceWidth;
     }
@@ -230,5 +211,13 @@ public class GameView extends View {
         } else {
             return 1;
         }
+    }
+
+    public static boolean checkOutOfBoundsMoveRight(int current, int bounds) {
+        return current > bounds? true: false;
+    }
+
+    public static boolean checkOutOfBoundsMoveLeft(int current, int bounds) {
+        return current < bounds? true: false;
     }
 }
