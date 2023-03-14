@@ -93,4 +93,16 @@ public class Sprint3Test {
         mediumCar.vehicleX = 200;
         assertEquals(false, GameView.checkOutOfBoundsMoveLeft(mediumCar.vehicleX, 100));
     }
+
+    @Test
+    public void checkFrogGettersAndSetters() {
+        frog1.setFrogX(200);
+        frog2.setFrogY(300);
+        assertEquals(200, frog1.getFrogX(), 0);
+        assertEquals(300, frog2.getFrogY(), 0);
+
+        frog1.setScore(350);
+        assertEquals(350, frog1.getScore());
+    }
+
 }
