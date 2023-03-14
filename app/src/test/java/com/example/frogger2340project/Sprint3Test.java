@@ -77,4 +77,20 @@ public class Sprint3Test {
         }
         assertEquals(10, mediumCar.vehicleVelocity, 0);
     }
+
+    @Test
+    public void checkBoundsRight() {
+        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.vehicleX, 500));
+        assertEquals(true, GameView.checkOutOfBoundsMoveRight(mediumCar.vehicleX, 10));
+        mediumCar.vehicleX = 0;
+        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.vehicleX, 10));
+    }
+
+    @Test
+    public void checkBoundsLeft() {
+        assertEquals(false, GameView.checkOutOfBoundsMoveLeft(mediumCar.vehicleX, 0));
+        assertEquals(true, GameView.checkOutOfBoundsMoveLeft(mediumCar.vehicleX, 100));
+        mediumCar.vehicleX = 200;
+        assertEquals(false, GameView.checkOutOfBoundsMoveLeft(mediumCar.vehicleX, 100));
+    }
 }

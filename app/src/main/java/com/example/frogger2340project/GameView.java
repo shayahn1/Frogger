@@ -112,11 +112,11 @@ public class GameView extends View {
         canvas.drawBitmap(mediumCar2Back, newMediumCar2.vehicleX, newMediumCar2.vehicleY, null);
         newMediumCar2.vehicleX += newMediumCar2.vehicleVelocity;
         newMediumCar2.accelerate();
-        if (newMediumCar2.vehicleX > deviceWidth) {
+        if (checkOutOfBoundsMoveRight(newMediumCar2.vehicleX, deviceWidth)) {
             newMediumCar2.resetPosition3(mediumCar2Back.getWidth());
         }
         newMediumCar.vehicleX -= newMediumCar.vehicleVelocity;
-        if (newMediumCar.vehicleX < 0 - mediumCar2.getWidth()) {
+        if (checkOutOfBoundsMoveLeft(newMediumCar.vehicleX, 0 - mediumCar2.getWidth())) {
             newMediumCar.resetPosition2(mediumCar2.getWidth());
         }
         for (int i = 0; i < vehicles.size(); i++) {
@@ -211,5 +211,13 @@ public class GameView extends View {
         } else {
             return 1;
         }
+    }
+
+    public static boolean checkOutOfBoundsMoveRight(int current, int bounds) {
+        return current > bounds? true: false;
+    }
+
+    public static boolean checkOutOfBoundsMoveLeft(int current, int bounds) {
+        return current < bounds? true: false;
     }
 }
