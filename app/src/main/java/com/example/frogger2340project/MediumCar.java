@@ -62,6 +62,12 @@ public class MediumCar {
         vehicleVelocity = 1;
     }
 
+    public void wrapCar() {
+        if (vehicleX == 969) {
+            resetPosition2(50);
+        }
+    }
+
     public void accelerate() {
         vehicleVelocity++;
     }

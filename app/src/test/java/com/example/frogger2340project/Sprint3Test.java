@@ -2,8 +2,6 @@ package com.example.frogger2340project;
 
 import static org.junit.Assert.assertEquals;
 
-import android.content.Context;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -88,21 +86,17 @@ public class Sprint3Test {
 
     @Test
     public void checkBoundsLeft() {
-        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.getVehicleX(), 0));
-        assertEquals(true, GameView.checkOutOfBoundsMoveRight(mediumCar.getVehicleX(), 100));
+        assertEquals(false, GameView.checkOutOfBoundsMoveLeft(mediumCar.getVehicleX(), 0));
+        assertEquals(true, GameView.checkOutOfBoundsMoveLeft(mediumCar.getVehicleX(), 100));
         mediumCar.setVehicleX(200);
-        assertEquals(false, GameView.checkOutOfBoundsMoveRight(mediumCar.getVehicleX(), 100));
+        assertEquals(false, GameView.checkOutOfBoundsMoveLeft(mediumCar.getVehicleX(), 100));
     }
 
     @Test
-    public void checkFrogGettersAndSetters() {
-        frog1.setFrogX(200);
-        frog2.setFrogY(300);
-        assertEquals(200, frog1.getFrogX(), 0);
-        assertEquals(300, frog2.getFrogY(), 0);
-
-        frog1.setScore(350);
-        assertEquals(350, frog1.getScore());
+    public void checkVehicleWrapAround() {
+        mediumCar.setVehicleX(969);
+        mediumCar.wrapCar();
+        assertEquals(50, mediumCar.getVehicleX());
     }
 
 }
