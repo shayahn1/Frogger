@@ -99,13 +99,13 @@ public class GameView extends View {
         largeCars = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Vehicle vehicle = new Vehicle(context);
-            vehicle.getVehicleX() = 200 * i;
+            vehicle.setVehicleX(200 * i);
             vehicles.add(vehicle);
             MediumCar medium = new MediumCar(context);
-            medium.getVehicleX() = 300 * i;
+            medium.setVehicleX(300 * i);
             mediumCars.add(medium);
             LargeCar large = new LargeCar(context);
-            large.getVehicleX() = -(400 * i);
+            large.setVehicleX(400 * i);
             largeCars.add(large);
         }
     }
@@ -118,12 +118,12 @@ public class GameView extends View {
                 newMediumCar.getVehicleY(), null);
         canvas.drawBitmap(mediumCar2Back, newMediumCar2.getVehicleX(),
                 newMediumCar2.getVehicleY(), null);
-        newMediumCar2.getVehicleX() += newMediumCar2.getVehicleVelocity();
+        newMediumCar2.setVehicleX(newMediumCar2.getVehicleX() + newMediumCar2.getVehicleVelocity());
         newMediumCar2.accelerate();
         if (checkOutOfBoundsMoveRight(newMediumCar2.getVehicleX(), deviceWidth)) {
             newMediumCar2.resetPosition3(mediumCar2Back.getWidth());
         }
-        newMediumCar.getVehicleX() -= newMediumCar.getVehicleVelocity();
+        newMediumCar.setVehicleX(newMediumCar.getVehicleX() - newMediumCar.getVehicleVelocity());
         if (checkOutOfBoundsMoveLeft(newMediumCar.getVehicleX(), 0 - mediumCar2.getWidth())) {
             newMediumCar.resetPosition2(mediumCar2.getWidth());
         }
@@ -138,21 +138,24 @@ public class GameView extends View {
             vehicles.get(i).setVehicleFrame(vehicles.get(i).getVehicleFrame() + 1);
             largeCars.get(i).setVehicleFrame(largeCars.get(i).getVehicleFrame() + 1);
             if (vehicles.get(i).getVehicleFrame() > 2) {
-                vehicles.get(i).getVehicleFrame() = 0;
+                vehicles.get(i).setVehicleFrame(0);
             }
             if (mediumCars.get(i).getVehicleFrame() > 2) {
-                mediumCars.get(i).getVehicleFrame() = 0;
+                mediumCars.get(i).setVehicleFrame(0);
             }
             if (largeCars.get(i).getVehicleFrame() > 2) {
-                largeCars.get(i).getVehicleFrame() = 0;
+                largeCars.get(i).setVehicleFrame(0);
             }
-            vehicles.get(i).getVehicleX() -= vehicles.get(i).getVehicleVelocity();
-            mediumCars.get(i).getVehicleX() -= mediumCars.get(i).getVehicleVelocity();
-            largeCars.get(i).getVehicleX() += largeCars.get(i).getVehicleVelocity();
-            if (vehicles.get(i).getVehicleX() < 0 - vehicles.get(i).getCarWidth()) {
+            vehicles.get(i).setVehicleX(vehicles.get(i).getVehicleX()
+                    - vehicles.get(i).getVehicleVelocity());
+            mediumCars.get(i).setVehicleX(mediumCars.get(i).getVehicleX()
+                    - mediumCars.get(i).getVehicleVelocity());
+            largeCars.get(i).setVehicleX(largeCars.get(i).getVehicleX()
+                    + largeCars.get(i).getVehicleVelocity());
+            if (vehicles.get(i).getVehicleX() < -vehicles.get(i).getCarWidth()) {
                 vehicles.get(i).resetPosition();
             }
-            if (mediumCars.get(i).getVehicleX() < 0 - mediumCars.get(i).getMediumCarWidth()) {
+            if (mediumCars.get(i).getVehicleX() < -mediumCars.get(i).getMediumCarWidth()) {
                 mediumCars.get(i).resetPosition();
             }
             if (largeCars.get(i).getVehicleX() > deviceWidth) {
