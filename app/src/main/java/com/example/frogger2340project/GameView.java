@@ -64,6 +64,7 @@ public class GameView extends View {
         default:
             break;
         }
+        lives = livesCount(globalDifficulty);
         frog = Bitmap.createScaledBitmap(frog, frog.getWidth() * 2,
                 frog.getHeight() * 2, false);
         mediumCar2 = BitmapFactory.decodeResource(getResources(), R.drawable.mediumcar);
@@ -172,7 +173,6 @@ public class GameView extends View {
                 lives--;
             }
         }
-        lives = livesCount(globalDifficulty);
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
         canvas.drawText("Score: " + newFrog.getScore(), deviceWidth / 2, textSize * 2, textPaint);
@@ -212,6 +212,7 @@ public class GameView extends View {
                 newFrog.moveFrogLeft(newFrogX);
             }
         }
+        checkCollision();
         return true;
     }
 
@@ -234,5 +235,23 @@ public class GameView extends View {
 
     public static boolean checkOutOfBoundsMoveLeft(int current, int bounds) {
         return current < bounds;
+    }
+
+    public void updateLives() {
+        lives--;
+        if (lives == 0) {
+            //GAME OVER SCREEN IMPLEMENTATION
+        } else {
+            newFrog.setScore(0);
+            maxHeight = 50000.0f;
+            newFrog.setFrogX(deviceWidth / 2 - frog.getWidth() / 2);
+            newFrog.setFrogY(deviceHeight - 206 - frog.getHeight() / 2);
+        }
+    }
+
+    public void checkCollision() {
+        if (newFrog.getFrogY() <= 1044 && newFrog.getFrogY() >= 358) {
+            updateLives();
+        }
     }
 }
