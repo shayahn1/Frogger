@@ -2,6 +2,7 @@ package com.example.frogger2340project;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -170,7 +171,6 @@ public class GameView extends View {
                     && vehicles.get(i).getVehicleY() + vehicles.get(i).getCarHeight()
                     >= newFrog.getFrogY()
                     && vehicles.get(i).getVehicleY() <= newFrog.getFrogY()) { //+ frog.getHeight()
-                lives--;
             }
         }
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
@@ -240,10 +240,13 @@ public class GameView extends View {
     public void updateLives() {
         lives--;
         if (lives == 0) {
-            //GAME OVER SCREEN IMPLEMENTATION
+            Intent intent = new Intent(context, GameOver.class);
+            intent.putExtra("score", newFrog.getScore());
+            context.startActivity(intent);
+            ((Activity) context).finish();
         } else {
             newFrog.setScore(0);
-            maxHeight = 50000.0f;
+            newFrog.setMaxHeight();
             newFrog.setFrogX(deviceWidth / 2 - frog.getWidth() / 2);
             newFrog.setFrogY(deviceHeight - 206 - frog.getHeight() / 2);
         }

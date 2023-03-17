@@ -137,4 +137,8 @@ public class Frog {
             break;
         }
     }
+
+    public void setMaxHeight() {
+        this.maxHeight = 5000.0f;
+    }
 }
