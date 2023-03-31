@@ -167,11 +167,44 @@ public class GameView extends View {
 
         for (int i = 0; i < vehicles.size(); i++) {
             if (vehicles.get(i).getVehicleX() + vehicles.get(i).getCarWidth() >= newFrog.getFrogX()
-                    && vehicles.get(i).getVehicleX() <= newFrog.getFrogX() //+ frog.getWidth()
+                    && vehicles.get(i).getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
                     && vehicles.get(i).getVehicleY() + vehicles.get(i).getCarHeight()
                     >= newFrog.getFrogY()
-                    && vehicles.get(i).getVehicleY() <= newFrog.getFrogY()) { //+ frog.getHeight()
+                    && vehicles.get(i).getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+                updateLives();
             }
+        }
+        for (int i = 0; i < mediumCars.size(); i++) {
+            if (mediumCars.get(i).getVehicleX() + mediumCars.get(i).getMediumCarWidth() >= newFrog.getFrogX()
+                    && mediumCars.get(i).getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
+                    && mediumCars.get(i).getVehicleY() + mediumCars.get(i).getMediumCarHeight()
+                    >= newFrog.getFrogY()
+                    && mediumCars.get(i).getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+                updateLives();
+            }
+        }
+        for (int i = 0; i < largeCars.size(); i++) {
+            if (largeCars.get(i).getVehicleX() + largeCars.get(i).getLargeCarWidth() >= newFrog.getFrogX()
+                    && largeCars.get(i).getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
+                    && largeCars.get(i).getVehicleY() + largeCars.get(i).getLargeCarHeight()
+                    >= newFrog.getFrogY()
+                    && largeCars.get(i).getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+                updateLives();
+            }
+        }
+        if (newMediumCar.getVehicleX() + mediumCars.get(0).getMediumCarWidth() >= newFrog.getFrogX()
+                && newMediumCar.getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
+                && newMediumCar.getVehicleY() + mediumCars.get(0).getMediumCarHeight()
+                >= newFrog.getFrogY()
+                && newMediumCar.getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+            updateLives();
+        }
+        if (newMediumCar2.getVehicleX() + mediumCars.get(0).getMediumCarWidth() >= newFrog.getFrogX()
+                && newMediumCar2.getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
+                && newMediumCar2.getVehicleY() + mediumCars.get(0).getMediumCarHeight()
+                >= newFrog.getFrogY()
+                && newMediumCar2.getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+            updateLives();
         }
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
