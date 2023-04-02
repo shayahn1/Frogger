@@ -15,6 +15,9 @@
             android:name=".PlayerConfig"
             android:exported="false" />
         <activity
+            android:name=".GameOver"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -2,6 +2,7 @@ package com.example.frogger2340project;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -64,6 +65,7 @@ public class GameView extends View {
         default:
             break;
         }
+        lives = livesCount(globalDifficulty);
         frog = Bitmap.createScaledBitmap(frog, frog.getWidth() * 2,
                 frog.getHeight() * 2, false);
         mediumCar2 = BitmapFactory.decodeResource(getResources(), R.drawable.mediumcar);
@@ -165,14 +167,45 @@ public class GameView extends View {
 
         for (int i = 0; i < vehicles.size(); i++) {
             if (vehicles.get(i).getVehicleX() + vehicles.get(i).getCarWidth() >= newFrog.getFrogX()
-                    && vehicles.get(i).getVehicleX() <= newFrog.getFrogX() //+ frog.getWidth()
+                    && vehicles.get(i).getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
                     && vehicles.get(i).getVehicleY() + vehicles.get(i).getCarHeight()
                     >= newFrog.getFrogY()
-                    && vehicles.get(i).getVehicleY() <= newFrog.getFrogY()) { //+ frog.getHeight()
-                lives--;
+                    && vehicles.get(i).getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+                updateLives();
             }
         }
-        lives = livesCount(globalDifficulty);
+        for (int i = 0; i < mediumCars.size(); i++) {
+            if (mediumCars.get(i).getVehicleX() + mediumCars.get(i).getMediumCarWidth() >= newFrog.getFrogX()
+                    && mediumCars.get(i).getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
+                    && mediumCars.get(i).getVehicleY() + mediumCars.get(i).getMediumCarHeight()
+                    >= newFrog.getFrogY()
+                    && mediumCars.get(i).getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+                updateLives();
+            }
+        }
+        for (int i = 0; i < largeCars.size(); i++) {
+            if (largeCars.get(i).getVehicleX() + largeCars.get(i).getLargeCarWidth() >= newFrog.getFrogX()
+                    && largeCars.get(i).getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
+                    && largeCars.get(i).getVehicleY() + largeCars.get(i).getLargeCarHeight()
+                    >= newFrog.getFrogY()
+                    && largeCars.get(i).getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+                updateLives();
+            }
+        }
+        if (newMediumCar.getVehicleX() + mediumCars.get(0).getMediumCarWidth() >= newFrog.getFrogX()
+                && newMediumCar.getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
+                && newMediumCar.getVehicleY() + mediumCars.get(0).getMediumCarHeight()
+                >= newFrog.getFrogY()
+                && newMediumCar.getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+            updateLives();
+        }
+        if (newMediumCar2.getVehicleX() + mediumCars.get(0).getMediumCarWidth() >= newFrog.getFrogX()
+                && newMediumCar2.getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
+                && newMediumCar2.getVehicleY() + mediumCars.get(0).getMediumCarHeight()
+                >= newFrog.getFrogY()
+                && newMediumCar2.getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
+            updateLives();
+        }
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
         canvas.drawText("Score: " + newFrog.getScore(), deviceWidth / 2, textSize * 2, textPaint);
@@ -212,6 +245,7 @@ public class GameView extends View {
                 newFrog.moveFrogLeft(newFrogX);
             }
         }
+        checkCollision();
         return true;
     }
 
@@ -234,5 +268,26 @@ public class GameView extends View {
 
     public static boolean checkOutOfBoundsMoveLeft(int current, int bounds) {
         return current < bounds;
+    }
+
+    public void updateLives() {
+        lives--;
+        if (lives == 0) {
+            Intent intent = new Intent(context, GameOver.class);
+            intent.putExtra("score", newFrog.getScore());
+            context.startActivity(intent);
+            ((Activity) context).finish();
+        } else {
+            newFrog.setScore(0);
+            newFrog.setMaxHeight();
+            newFrog.setFrogX(deviceWidth / 2 - frog.getWidth() / 2);
+            newFrog.setFrogY(deviceHeight - 206 - frog.getHeight() / 2);
+        }
+    }
+
+    public void checkCollision() {
+        if (newFrog.getFrogY() <= 1044 && newFrog.getFrogY() >= 358) {
+            updateLives();
+        }
     }
 }
