@@ -26,7 +26,7 @@ public class GameOver extends AppCompatActivity {
         scoreTV.setText(scoreTV.getText() + "" + score);
         sharedPreferences = getSharedPreferences("my_pref", 0);
         int highest = sharedPreferences.getInt("highest", 0);
-        if (score > highest) {
+        if (isHighest(score, highest) == true) {
             highest = score;
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("highest", highest);
@@ -43,5 +43,9 @@ public class GameOver extends AppCompatActivity {
 
     public void exit(View view) {
         finish();
+    }
+
+    public static boolean isHighest(int score, int highest) {
+        return score > highest ? true : false;
     }
 }
