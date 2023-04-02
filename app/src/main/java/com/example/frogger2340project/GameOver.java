@@ -32,11 +32,11 @@ public class GameOver extends AppCompatActivity {
             editor.putInt("highest", highest);
             editor.commit();
         }
-        hiscoreTV.setText(hiscoreTV.getText() + "" + highest);
+        hiscoreTV.setText("Highest: " + highest);
     }
 
     public void restart(View view) {
-        Intent intent = new Intent(GameOver.this, MainActivity.class);
+        Intent intent = new Intent(GameOver.this, PlayerConfig.class);
         startActivity(intent);
         finish();
     }

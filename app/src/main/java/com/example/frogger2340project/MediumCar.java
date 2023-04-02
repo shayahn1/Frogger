@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 
 import java.util.Random;
 
-public class MediumCar {
+public class MediumCar implements AcceleratingCar {
     private Bitmap[] medium = new Bitmap[3];
     private int vehicleFrame = 0;
     private int vehicleX;
