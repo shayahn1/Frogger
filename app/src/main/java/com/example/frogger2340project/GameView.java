@@ -270,7 +270,9 @@ public class GameView extends View {
                 newFrog.moveFrogLeft(newFrogX);
             }
         }
-        checkCollision();
+        if (checkCollision(newFrog.getFrogY()) == true) {
+            updateLives();
+        };
         return true;
     }
 
@@ -310,9 +312,11 @@ public class GameView extends View {
         }
     }
 
-    public void checkCollision() {
-        if (newFrog.getFrogY() <= 1044 && newFrog.getFrogY() >= 358) {
-            updateLives();
+    public static boolean checkCollision(float frogY) {
+        if (frogY <= 1044 && frogY >= 358) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
