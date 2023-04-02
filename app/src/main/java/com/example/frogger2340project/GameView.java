@@ -290,4 +290,25 @@ public class GameView extends View {
             updateLives();
         }
     }
+
+    public void setFrog(Frog frog1) {
+        newFrog = frog1;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+    public void setLives(int lives1) {
+        lives = lives1;
+    }
+    public int getDeviceHeight() {
+        return deviceHeight;
+    }
+
+    public int getFrogWidth() {
+        return frog.getWidth();
+    }
+    public int getFrogHeight() {
+        return frog.getHeight();
+    }
 }
