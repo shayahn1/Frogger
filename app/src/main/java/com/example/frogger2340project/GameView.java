@@ -166,59 +166,35 @@ public class GameView extends View {
         }
 
         for (int i = 0; i < vehicles.size(); i++) {
-//            if (vehicles.get(i).getVehicleX() + vehicles.get(i).getCarWidth() >= newFrog.getFrogX()
-//                    && vehicles.get(i).getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
-//                    && vehicles.get(i).getVehicleY() + vehicles.get(i).getCarHeight()
-//                    >= newFrog.getFrogY()
-//                    && vehicles.get(i).getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
             if (checkVehicleCollision(vehicles.get(i).getVehicleX(), vehicles.get(i).getVehicleY(),
                     vehicles.get(i).getCarWidth(), vehicles.get(i).getCarHeight(),
-                    newFrog.getFrogX(), newFrog.getFrogY(), frog.getWidth(), frog.getHeight()) == true) {
+                    newFrog.getFrogX(), newFrog.getFrogY())) {
                 updateLives();
             }
         }
         for (int i = 0; i < mediumCars.size(); i++) {
-//            if (mediumCars.get(i).getVehicleX() + mediumCars.get(i).getMediumCarWidth() >= newFrog.getFrogX()
-//                    && mediumCars.get(i).getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
-//                    && mediumCars.get(i).getVehicleY() + mediumCars.get(i).getMediumCarHeight()
-//                    >= newFrog.getFrogY()
-//                    && mediumCars.get(i).getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
-            if (checkVehicleCollision(mediumCars.get(i).getVehicleX(), mediumCars.get(i).getVehicleY(),
-                    mediumCars.get(i).getMediumCarWidth(), mediumCars.get(i).getMediumCarHeight(),
-                    newFrog.getFrogX(), newFrog.getFrogY(), frog.getWidth(), frog.getHeight()) == true) {
+            if (checkVehicleCollision(mediumCars.get(i).getVehicleX(),
+                    mediumCars.get(i).getVehicleY(), mediumCars.get(i).getMediumCarWidth(),
+                    mediumCars.get(i).getMediumCarHeight(), newFrog.getFrogX(),
+                    newFrog.getFrogY())) {
                 updateLives();
             }
         }
         for (int i = 0; i < largeCars.size(); i++) {
-//            if (largeCars.get(i).getVehicleX() + largeCars.get(i).getLargeCarWidth() >= newFrog.getFrogX()
-//                    && largeCars.get(i).getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
-//                    && largeCars.get(i).getVehicleY() + largeCars.get(i).getLargeCarHeight()
-//                    >= newFrog.getFrogY()
-//                    && largeCars.get(i).getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
-            if (checkVehicleCollision(largeCars.get(i).getVehicleX(), largeCars.get(i).getVehicleY(),
-                    largeCars.get(i).getLargeCarWidth(), largeCars.get(i).getLargeCarHeight(),
-                    newFrog.getFrogX(), newFrog.getFrogY(), frog.getWidth(), frog.getHeight()) == true) {
+            if (checkVehicleCollision(largeCars.get(i).getVehicleX(),
+                    largeCars.get(i).getVehicleY(), largeCars.get(i).getLargeCarWidth(),
+                    largeCars.get(i).getLargeCarHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
                 updateLives();
             }
         }
-//        if (newMediumCar.getVehicleX() + mediumCars.get(0).getMediumCarWidth() >= newFrog.getFrogX()
-//                && newMediumCar.getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
-//                && newMediumCar.getVehicleY() + mediumCars.get(0).getMediumCarHeight()
-//                >= newFrog.getFrogY()
-//                && newMediumCar.getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
         if (checkVehicleCollision(newMediumCar.getVehicleX(), newMediumCar.getVehicleY(),
                 mediumCars.get(0).getMediumCarWidth(), mediumCars.get(0).getMediumCarHeight(),
-                newFrog.getFrogX(), newFrog.getFrogY(), frog.getWidth(), frog.getHeight()) == true) {
+                newFrog.getFrogX(), newFrog.getFrogY())) {
             updateLives();
         }
-//        if (newMediumCar2.getVehicleX() + mediumCars.get(0).getMediumCarWidth() >= newFrog.getFrogX()
-//                && newMediumCar2.getVehicleX() <= newFrog.getFrogX() + frog.getWidth()
-//                && newMediumCar2.getVehicleY() + mediumCars.get(0).getMediumCarHeight()
-//                >= newFrog.getFrogY()
-//                && newMediumCar2.getVehicleY() <= newFrog.getFrogY() + frog.getHeight()) {
         if (checkVehicleCollision(newMediumCar2.getVehicleX(), newMediumCar2.getVehicleY(),
                 mediumCars.get(0).getMediumCarWidth(), mediumCars.get(0).getMediumCarHeight(),
-                newFrog.getFrogX(), newFrog.getFrogY(), frog.getWidth(), frog.getHeight()) == true) {
+                newFrog.getFrogX(), newFrog.getFrogY())) {
             updateLives();
         }
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
@@ -232,14 +208,11 @@ public class GameView extends View {
         return globalDifficulty;
     }
 
-    public static boolean checkVehicleCollision(int vehicleX, int vehicleY, int vehicleWidth, int vehicleHeight,
-                                         float frogX, float frogY, int frogWidth, int frogHeight) {
-        if(vehicleX + vehicleWidth >= frogX && vehicleX <= frogX + frogWidth
-                && vehicleY + vehicleHeight >= frogY && vehicleY <= frogY + frogHeight) {
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean checkVehicleCollision(int vehicleX, int vehicleY,
+                                                int vehicleWidth, int vehicleHeight,
+                                         float frogX, float frogY) {
+        return vehicleX + vehicleWidth >= frogX && vehicleX <= frogX + 78
+                && vehicleY + vehicleHeight >= frogY && vehicleY <= frogY + 82;
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -270,9 +243,9 @@ public class GameView extends View {
                 newFrog.moveFrogLeft(newFrogX);
             }
         }
-        if (checkCollision(newFrog.getFrogY()) == true) {
+        if (checkCollision(newFrog.getFrogY())) {
             updateLives();
-        };
+        }
         return true;
     }
 
@@ -313,10 +286,6 @@ public class GameView extends View {
     }
 
     public static boolean checkCollision(float frogY) {
-        if (frogY <= 1044 && frogY >= 358) {
-            return true;
-        } else {
-            return false;
-        }
+        return frogY <= 1044 && frogY >= 358;
     }
 }

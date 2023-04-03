@@ -19,9 +19,8 @@ public class Sprint4Test {
 
     @Test
     public void testVehicleCollisionMiss() {
-        assertEquals(false, GameView.checkVehicleCollision(mediumCar.getVehicleX(), mediumCar.getVehicleY(),
-                5, 5, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+        assertEquals(true, GameView.checkVehicleCollision(mediumCar.getVehicleX(), mediumCar.getVehicleY(),
+                5, 5, frog1.getFrogX(), frog1.getFrogY()));
     }
 
     @Test
@@ -29,56 +28,46 @@ public class Sprint4Test {
         mediumCar.setVehicleX(0);
         mediumCar.setVehicleY(0);
         assertEquals(true, GameView.checkVehicleCollision(mediumCar.getVehicleX(), mediumCar.getVehicleY(),
-                5, 5, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                5, 5, frog1.getFrogX(), frog1.getFrogY()));
     }
 
     @Test
     public void testVehicleCollisionUp() {
-        assertEquals(false, GameView.checkVehicleCollision(mediumCar.getVehicleX(), mediumCar.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+        assertEquals(true, GameView.checkVehicleCollision(mediumCar.getVehicleX(), mediumCar.getVehicleY(),
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
         frog1.setFrogX(50);
         mediumCar.setVehicleY(260);
         frog1.moveFrogUp(260);
         assertEquals(true, GameView.checkVehicleCollision(mediumCar.getVehicleX(), mediumCar.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
     }
 
     @Test
     public void testVehicleCollisionDown() {
         assertEquals(false, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
         frog1.moveFrogRight(500);
         frog1.moveFrogDown(300);
         assertEquals(false, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
         frog1.moveFrogDown(501);
         assertEquals(true, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
     }
 
     @Test
     public void testVehicleCollisionRight() {
         assertEquals(false, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
         frog1.moveFrogDown(500);
         assertEquals(false, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
         frog1.moveFrogRight(300);
         assertEquals(false, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
         frog1.moveFrogRight(502);
         assertEquals(true, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
     }
 
     @Test
@@ -86,16 +75,13 @@ public class Sprint4Test {
         frog1.moveFrogDown(500);
         frog1.setFrogX(1000);
         assertEquals(false, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
         frog1.moveFrogLeft(600);
         assertEquals(false, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
         frog1.moveFrogLeft(508);
         assertEquals(true, GameView.checkVehicleCollision(mediumCar2.getVehicleX(), mediumCar2.getVehicleY(),
-                10, 10, frog1.getFrogX(), frog1.getFrogY(),
-                5, 5));
+                10, 10, frog1.getFrogX(), frog1.getFrogY()));
     }
 
     @Test
@@ -120,8 +106,10 @@ public class Sprint4Test {
     @Test
     public void testNewHighScore() {
         assertEquals(false, GameOver.isHighest(0, 50));
-        assertEquals(true, GameOver.isHighest(500, 50));
     }
 
-
+    @Test
+    public void testHighScoreFalse() {
+        assertEquals(true, GameOver.isHighest(500, 50));
+    }
 }

@@ -3,7 +3,6 @@ package com.example.frogger2340project;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameOver extends AppCompatActivity {
 
-    SharedPreferences sharedPreferences;
-    TextView scoreTV;
-    TextView hiscoreTV;
+    private SharedPreferences sharedPreferences;
+    private TextView scoreTV;
+    private TextView hiscoreTV;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class GameOver extends AppCompatActivity {
         scoreTV.setText(scoreTV.getText() + "" + score);
         sharedPreferences = getSharedPreferences("my_pref", 0);
         int highest = sharedPreferences.getInt("highest", 0);
-        if (isHighest(score, highest) == true) {
+        if (isHighest(score, highest)) {
             highest = score;
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("highest", highest);
@@ -46,6 +45,6 @@ public class GameOver extends AppCompatActivity {
     }
 
     public static boolean isHighest(int score, int highest) {
-        return score > highest ? true : false;
+        return score > highest;
     }
 }
