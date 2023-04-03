@@ -2,7 +2,7 @@
 Frogger CS 2340-C Group 68
 Team Members: Yunsu Kim, Laltih Siripurapu, Aidan Pek, Shayahn Mirfendereski, Kendall Taylor
 
-This project is current as of the end of Sprint 2.
+This project is current as of the end of Sprint 4.
 
 The project currently includes:
 - Start Screen
@@ -12,3 +12,4 @@ The project currently includes:
 - Vehicle implementation: Vehicles move across the road tiles to serve as obstacles for the player.
 - Score count and display: Score increases as the player moves across the map and avoids obstacles.
 - JUnit tests: Tests created for the functionality of the player configuration and player movement.
+- Collisions: Player collides with vehicles and the river, losing lives and score, and game goes to game over screen when all lives are lost.
