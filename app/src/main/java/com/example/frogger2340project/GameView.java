@@ -246,6 +246,9 @@ public class GameView extends View {
         if (checkCollision(newFrog.getFrogY())) {
             updateLives();
         }
+        if (checkWin(newFrog.getFrogY())) {
+            winScreen();
+        }
         return true;
     }
 
@@ -285,7 +288,18 @@ public class GameView extends View {
         }
     }
 
+    public void winScreen() {
+        Intent intent = new Intent(context, GameWin.class);
+        intent.putExtra("score", newFrog.getScore());
+        context.startActivity(intent);
+        ((Activity) context).finish();
+    }
+
     public static boolean checkCollision(float frogY) {
         return frogY <= 1044 && frogY >= 358;
+    }
+
+    public static boolean checkWin(float frogY) {
+        return frogY == 260;
     }
 }
