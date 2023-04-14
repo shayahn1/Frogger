@@ -69,19 +69,11 @@ public class Frog {
     }
 
     public boolean moveFrogLeftLog(float newFrogX) {
-        if (newFrogX < 33) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(newFrogX < 33);
     }
 
     public boolean moveFrogRightLog(float newFrogX) {
-        if (newFrogX > 969) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(newFrogX > 969);
     }
 
     public void setFrogX(float x) {

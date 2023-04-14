@@ -123,7 +123,7 @@ public class GameView extends View {
             logs.add(log);
             Log log2 = new Log(context);
             log2.resetPosition2();
-            log2.setLogX(400* i);
+            log2.setLogX(400 * i);
             logs2.add(log2);
             Log log3 = new Log(context);
             log3.resetPosition3();
@@ -249,11 +249,16 @@ public class GameView extends View {
             logs.get(i).setLogX(logs.get(i).getLogX() - logs.get(i).getLogVelocity());
             logs2.get(i).setLogX(logs2.get(i).getLogX() - logs2.get(i).getLogVelocity());
             logs3.get(i).setLogX(logs3.get(i).getLogX() + logs3.get(i).getLogVelocity());
-            smallLogs.get(i).setLogX(smallLogs.get(i).getLogX() - smallLogs.get(i).getLogVelocity());
-            smallLogs2.get(i).setLogX(smallLogs2.get(i).getLogX() + smallLogs2.get(i).getLogVelocity());
-            smallLogs3.get(i).setLogX(smallLogs3.get(i).getLogX() + smallLogs3.get(i).getLogVelocity());
-            smallLogs4.get(i).setLogX(smallLogs4.get(i).getLogX() - smallLogs4.get(i).getLogVelocity());
-            smallLogs5.get(i).setLogX(smallLogs5.get(i).getLogX() + smallLogs5.get(i).getLogVelocity());
+            smallLogs.get(i).setLogX(smallLogs.get(i).getLogX()
+                   - smallLogs.get(i).getLogVelocity());
+            smallLogs2.get(i).setLogX(smallLogs2.get(i).getLogX()
+                   + smallLogs2.get(i).getLogVelocity());
+            smallLogs3.get(i).setLogX(smallLogs3.get(i).getLogX()
+                   + smallLogs3.get(i).getLogVelocity());
+            smallLogs4.get(i).setLogX(smallLogs4.get(i).getLogX()
+                    - smallLogs4.get(i).getLogVelocity());
+            smallLogs5.get(i).setLogX(smallLogs5.get(i).getLogX()
+                    + smallLogs5.get(i).getLogVelocity());
             if (vehicles.get(i).getVehicleX() < -vehicles.get(i).getCarWidth()) {
                 vehicles.get(i).resetPosition();
             }
@@ -313,11 +318,14 @@ public class GameView extends View {
         }
         onLog = false;
         for (int i = 0; i < logs.size(); i++) {
-            if (checkLogCollision(logs.get(i).getLogX(), logs.get(i).getLogY(), logs.get(i).getLogWidth(),
+            if (checkLogCollision(logs.get(i).getLogX(), logs.get(i).getLogY(),
+                    logs.get(i).getLogWidth(),
                     logs.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
                 onLog = true;
-                if (newFrog.moveFrogLeftLog(newFrog.getFrogX() - logs.get(i).getLogVelocity())) {
-                    newFrog.moveFrogLeft(newFrog.getFrogX() - logs.get(i).getLogVelocity());
+                if (newFrog.moveFrogLeftLog(newFrog.getFrogX()
+                        - logs.get(i).getLogVelocity())) {
+                    newFrog.moveFrogLeft(newFrog.getFrogX()
+                            - logs.get(i).getLogVelocity());
                 } else {
                     updateLives();
                 }
@@ -325,11 +333,14 @@ public class GameView extends View {
             }
         }
         for (int i = 0; i < logs2.size(); i++) {
-            if (checkLogCollision(logs2.get(i).getLogX(), logs2.get(i).getLogY(), logs2.get(i).getLogWidth(),
+            if (checkLogCollision(logs2.get(i).getLogX(), logs2.get(i).getLogY(),
+                    logs2.get(i).getLogWidth(),
                     logs2.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
                 onLog = true;
-                if (newFrog.moveFrogLeftLog(newFrog.getFrogX() - logs2.get(i).getLogVelocity())) {
-                    newFrog.moveFrogLeft(newFrog.getFrogX() - logs2.get(i).getLogVelocity());
+                if (newFrog.moveFrogLeftLog(newFrog.getFrogX()
+                        - logs2.get(i).getLogVelocity())) {
+                    newFrog.moveFrogLeft(newFrog.getFrogX()
+                            - logs2.get(i).getLogVelocity());
                 } else {
                     updateLives();
                 }
@@ -337,11 +348,15 @@ public class GameView extends View {
             }
         }
         for (int i = 0; i < logs3.size(); i++) {
-            if (checkLogCollision(logs3.get(i).getLogX(), logs3.get(i).getLogY(), logs3.get(i).getLogWidth(),
-                    logs3.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
+            if (checkLogCollision(logs3.get(i).getLogX(), logs3.get(i).getLogY(),
+                    logs3.get(i).getLogWidth(),
+                    logs3.get(i).getLogHeight(), newFrog.getFrogX(),
+                    newFrog.getFrogY())) {
                 onLog = true;
-                if (newFrog.moveFrogRightLog(newFrog.getFrogX() + logs3.get(i).getLogVelocity())) {
-                    newFrog.moveFrogRight(newFrog.getFrogX() + logs3.get(i).getLogVelocity());
+                if (newFrog.moveFrogRightLog(newFrog.getFrogX()
+                        + logs3.get(i).getLogVelocity())) {
+                    newFrog.moveFrogRight(newFrog.getFrogX()
+                            + logs3.get(i).getLogVelocity());
                 } else {
                     updateLives();
                 }
@@ -349,11 +364,15 @@ public class GameView extends View {
             }
         }
         for (int i = 0; i < smallLogs.size(); i++) {
-            if (checkLogCollision(smallLogs.get(i).getLogX(), smallLogs.get(i).getLogY(), smallLogs.get(i).getLogWidth(),
-                    smallLogs.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
+            if (checkLogCollision(smallLogs.get(i).getLogX(), smallLogs.get(i).getLogY(),
+                    smallLogs.get(i).getLogWidth(),
+                    smallLogs.get(i).getLogHeight(), newFrog.getFrogX(),
+                    newFrog.getFrogY())) {
                 onLog = true;
-                if (newFrog.moveFrogLeftLog(newFrog.getFrogX() - smallLogs.get(i).getLogVelocity())) {
-                    newFrog.moveFrogLeft(newFrog.getFrogX() - smallLogs.get(i).getLogVelocity());
+                if (newFrog.moveFrogLeftLog(newFrog.getFrogX()
+                        - smallLogs.get(i).getLogVelocity())) {
+                    newFrog.moveFrogLeft(newFrog.getFrogX()
+                            - smallLogs.get(i).getLogVelocity());
                 } else {
                     updateLives();
                 }
@@ -361,11 +380,14 @@ public class GameView extends View {
             }
         }
         for (int i = 0; i < smallLogs2.size(); i++) {
-            if (checkLogCollision(smallLogs2.get(i).getLogX(), smallLogs2.get(i).getLogY(), smallLogs2.get(i).getLogWidth(),
+            if (checkLogCollision(smallLogs2.get(i).getLogX(), smallLogs2.get(i).getLogY(),
+                    smallLogs2.get(i).getLogWidth(),
                     smallLogs2.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
                 onLog = true;
-                if (newFrog.moveFrogRightLog(newFrog.getFrogX() + smallLogs2.get(i).getLogVelocity())) {
-                    newFrog.moveFrogRight(newFrog.getFrogX() + smallLogs2.get(i).getLogVelocity());
+                if (newFrog.moveFrogRightLog(newFrog.getFrogX()
+                        + smallLogs2.get(i).getLogVelocity())) {
+                    newFrog.moveFrogRight(newFrog.getFrogX()
+                            + smallLogs2.get(i).getLogVelocity());
                 } else {
                     updateLives();
                 }
@@ -373,31 +395,43 @@ public class GameView extends View {
             }
         }
         for (int i = 0; i < smallLogs3.size(); i++) {
-            if (checkLogCollision(smallLogs3.get(i).getLogX(), smallLogs3.get(i).getLogY(), smallLogs3.get(i).getLogWidth(),
-                    smallLogs3.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
+            if (checkLogCollision(smallLogs3.get(i).getLogX(), smallLogs3.get(i).getLogY(),
+                    smallLogs3.get(i).getLogWidth(),
+                    smallLogs3.get(i).getLogHeight(), newFrog.getFrogX(),
+                    newFrog.getFrogY())) {
                 onLog = true;
-                if (newFrog.moveFrogRightLog(newFrog.getFrogX() + smallLogs3.get(i).getLogVelocity())) {
-                    newFrog.moveFrogRight(newFrog.getFrogX() + smallLogs3.get(i).getLogVelocity());
+                if (newFrog.moveFrogRightLog(newFrog.getFrogX()
+                        + smallLogs3.get(i).getLogVelocity())) {
+                    newFrog.moveFrogRight(newFrog.getFrogX()
+                            + smallLogs3.get(i).getLogVelocity());
                 } else {
                     updateLives();
                 }
                 break;
             }
-            if (checkLogCollision(smallLogs4.get(i).getLogX(), smallLogs4.get(i).getLogY(), smallLogs4.get(i).getLogWidth(),
-                    smallLogs4.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
+            if (checkLogCollision(smallLogs4.get(i).getLogX(), smallLogs4.get(i).getLogY(),
+                    smallLogs4.get(i).getLogWidth(),
+                    smallLogs4.get(i).getLogHeight(), newFrog.getFrogX(),
+                    newFrog.getFrogY())) {
                 onLog = true;
-                if (newFrog.moveFrogLeftLog(newFrog.getFrogX() - smallLogs4.get(i).getLogVelocity())) {
-                    newFrog.moveFrogLeft(newFrog.getFrogX() - smallLogs4.get(i).getLogVelocity());
+                if (newFrog.moveFrogLeftLog(newFrog.getFrogX()
+                        - smallLogs4.get(i).getLogVelocity())) {
+                    newFrog.moveFrogLeft(newFrog.getFrogX()
+                            - smallLogs4.get(i).getLogVelocity());
                 } else {
                     updateLives();
                 }
                 break;
             }
-            if (checkLogCollision(smallLogs5.get(i).getLogX(), smallLogs5.get(i).getLogY(), smallLogs5.get(i).getLogWidth(),
-                    smallLogs5.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
+            if (checkLogCollision(smallLogs5.get(i).getLogX(), smallLogs5.get(i).getLogY(),
+                    smallLogs5.get(i).getLogWidth(),
+                    smallLogs5.get(i).getLogHeight(), newFrog.getFrogX(),
+                    newFrog.getFrogY())) {
                 onLog = true;
-                if (newFrog.moveFrogRightLog(newFrog.getFrogX() + smallLogs5.get(i).getLogVelocity())) {
-                    newFrog.moveFrogRight(newFrog.getFrogX() + smallLogs5.get(i).getLogVelocity());
+                if (newFrog.moveFrogRightLog(newFrog.getFrogX()
+                        + smallLogs5.get(i).getLogVelocity())) {
+                    newFrog.moveFrogRight(newFrog.getFrogX()
+                            + smallLogs5.get(i).getLogVelocity());
                 } else {
                     updateLives();
                 }
@@ -419,7 +453,8 @@ public class GameView extends View {
         }
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
-        canvas.drawText("Score: " + newFrog.getScore(), deviceWidth / 2, textSize * 2, textPaint);
+        canvas.drawText("Score: " + newFrog.getScore(), deviceWidth / 2,
+                textSize * 2, textPaint);
         canvas.drawText(PlayerConfig.getPlayerName(), 20, textSize * 2, textPaint);
         handler.postDelayed(runnable, updateMillis);
     }
@@ -437,7 +472,8 @@ public class GameView extends View {
 
     public static boolean checkLogCollision(int logX, int logY, int logWidth, int logHeight,
                                             float frogX, float frogY) {
-        return logX + logWidth >= frogX && logX <= frogX + 78 && logY + logHeight >= frogY && logY <= frogY + 82;
+        return logX + logWidth >= frogX && logX <= frogX + 78 && logY
+                + logHeight >= frogY && logY <= frogY + 82;
     }
 
     public static boolean checkCollision(float frogY) {
