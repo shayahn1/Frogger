@@ -32,15 +32,13 @@ public class GameView extends View {
     private Paint healthPaint = new Paint();
     private float textSize = 80;
     private int lives;
-    private static int score;
-    private float oldFrogX;
-    private float oldX;
     private static int deviceWidth;
     private static int deviceHeight;
     private String globalDifficulty;
     private ArrayList<Vehicle> vehicles;
     private ArrayList<MediumCar> mediumCars;
     private ArrayList<LargeCar> largeCars;
+
     private ArrayList<Log> logs;
     private ArrayList<Log> logs2;
     private ArrayList<Log> logs3;
