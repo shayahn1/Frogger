@@ -64,6 +64,22 @@ public class Frog {
         }
     }
 
+    public boolean moveFrogLeftLog(float newFrogX) {
+        if (newFrogX < 33) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean moveFrogRightLog(float newFrogX) {
+        if (newFrogX > 969) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public void setFrogX(float x) {
         this.frogX = x;
     }

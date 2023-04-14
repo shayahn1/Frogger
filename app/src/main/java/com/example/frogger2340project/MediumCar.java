@@ -54,6 +54,9 @@ public class MediumCar implements AcceleratingCar {
         vehicleX = GameView.getDeviceWidth() + width;
         vehicleY = 1338;
         vehicleVelocity += 5; //+ random.nextInt(16);
+        if (vehicleVelocity > 100) {
+            vehicleVelocity = 5;
+        }
     }
 
     public void resetPosition3(int width) {
