@@ -472,10 +472,14 @@ public class GameView extends View {
                 newFrog.moveFrogLeft(newFrogX);
             }
         }
-        if (newFrog.getFrogY() == 260) {
+        if (checkWinScreen(newFrog.getFrogY())) {
             winScreen();
         }
         return true;
+    }
+
+    public static boolean checkWinScreen(float frogY) {
+        return frogY == 260;
     }
 
     public static int getDeviceWidth() {
