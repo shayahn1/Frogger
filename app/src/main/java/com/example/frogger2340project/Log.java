@@ -13,6 +13,11 @@ public class Log {
     private int logY;
     private int logVelocity;
 
+    public Log(int x, int y, int veloc) {
+        logX = x;
+        logY = y;
+        logVelocity = veloc;
+    }
     public Log(Context context) {
         log[0] = BitmapFactory.decodeResource(context.getResources(), R.drawable.log);
         log[0] = Bitmap.createScaledBitmap(log[0], log[0].getWidth() * 2,
@@ -58,6 +63,7 @@ public class Log {
     public void setLogX(int newLogX) {
         logX = newLogX;
     }
+    public void setLogY(int newLogY) { logY = newLogY; }
 
     public int getLogFrame() {
         return logFrame;
