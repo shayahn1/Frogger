@@ -165,7 +165,9 @@ public class GameView extends View {
                     smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
         canvas.drawBitmap(frog, newFrog.getFrogX(), newFrog.getFrogY(), null);
         movementActions2(newFrog, vehicles, mediumCars, largeCars, logs, logs2, logs3, 
-                    smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+                    smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5, 
+                    MediumCar newMediumCar, MediumCar newMediumCar2, Canvas canvas, 
+                    PlayerConfig PlayerConfig, Handler handler);
 
     }
 
@@ -517,7 +519,8 @@ public class GameView extends View {
     public void movementActions2(Frog newFrog, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars,
         ArrayList<LargeCar> largeCars, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3, 
         ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, ArrayList<SmallLog> smallLogs3,
-        ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5) {
+        ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5, MediumCar newMediumCar, 
+        MediumCar newMediumCar2, Canvas canvas, PlayerConfig PlayerConfig, Handler handler) {
         vehicleCollision(vehicles, newFrog);
         mediumCarCollision(mediumCars, newFrog);
         largeCarCollision(largeCars, newFrog);
