@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameWin extends AppCompatActivity {
-    SharedPreferences sharedPreferences;
-    TextView scoreTV;
+    private SharedPreferences sharedPreferences;
+    private TextView scoreTV;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

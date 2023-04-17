@@ -18,6 +18,13 @@ public class Sprint5Test {
     }
 
     @Test
+    public void testLogCreation() {
+        assertEquals(50, log.getLogX());
+        assertEquals(50, log.getLogY());
+        assertEquals(5, log.getLogVelocity());
+    }
+
+    @Test
     public void testLogCollision() {
         assertEquals(true, GameView.checkLogCollision(log.getLogX(), log.getLogY(),
                 5, 5, frog1.getFrogX(), frog1.getFrogY()));
