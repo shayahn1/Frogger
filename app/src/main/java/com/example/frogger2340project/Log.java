@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import java.util.Random;
-
 public class Log {
     private Bitmap[] log = new Bitmap[3];
     private int logFrame = 0;
@@ -63,7 +61,9 @@ public class Log {
     public void setLogX(int newLogX) {
         logX = newLogX;
     }
-    public void setLogY(int newLogY) { logY = newLogY; }
+    public void setLogY(int newLogY) {
+        logY = newLogY;
+    }
 
     public int getLogFrame() {
         return logFrame;
