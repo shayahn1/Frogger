@@ -1,4 +1,6 @@
 # Frogger Android Mobile Game
+The Frogger mobile phone game is a road-crossing game. The user can configure their own player and navigate it across a series of obstacles to reach the goal and win the game.
+
 This project is currently on v5.0 and includes:
 - Start Screen
 - Player Configuration: User will input their User Name, Difficulty Level, and Sprite color.
