@@ -159,11 +159,27 @@ public class GameView extends View {
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawBitmap(background, null, rectBackground, null);
-        canvas.drawBitmap(mediumCar2, newMediumCar.getVehicleX(),
-                newMediumCar.getVehicleY(), null);
-        canvas.drawBitmap(mediumCar2Back, newMediumCar2.getVehicleX(),
-                newMediumCar2.getVehicleY(), null);
+        drawActions1(canvas, background, rectBackground, mediumCar2, newMediumCar, mediumCar2Back, newMediumCar2);
+        mediumCarActions(newMediumCar2, mediumCar2Back, newMediumCar, mediumCar2);
+        movementActions(canvas, vehicles, mediumCars, largeCars, logs, logs2, logs3, 
+                    smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+        canvas.drawBitmap(frog, newFrog.getFrogX(), newFrog.getFrogY(), null);
+        movementActions2(newFrog, vehicles, mediumCars, largeCars, logs, logs2, logs3, 
+                    smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5, 
+                    MediumCar newMediumCar, MediumCar newMediumCar2, Canvas canvas, 
+                    PlayerConfig PlayerConfig, Handler handler);
+
+    }
+
+    public void drawActions1(Canvas canvas, Bitmap background, Rect rectBackground, Bitmap mediumCar2, MediumCar newMediumCar, Bitmap mediumCar2Back, MediumCar newMediumCar2) {
+            canvas.drawBitmap(background, null, rectBackground, null);
+            canvas.drawBitmap(mediumCar2, newMediumCar.getVehicleX(),
+                    newMediumCar.getVehicleY(), null);
+            canvas.drawBitmap(mediumCar2Back, newMediumCar2.getVehicleX(),
+                    newMediumCar2.getVehicleY(), null);
+    }
+
+    public void mediumCarActions(MediumCar newMediumCar2, Bitmap mediumCar2Back, MediumCar newMediumCar, Bitmap mediumCar2) {
         newMediumCar2.setVehicleX(newMediumCar2.getVehicleX() + newMediumCar2.getVehicleVelocity());
         newMediumCar2.accelerate();
         if (checkOutOfBoundsMoveRight(newMediumCar2.getVehicleX(), deviceWidth)) {
@@ -173,142 +189,248 @@ public class GameView extends View {
         if (checkOutOfBoundsMoveLeft(newMediumCar.getVehicleX(), 0 - mediumCar2.getWidth())) {
             newMediumCar.resetPosition2(mediumCar2.getWidth());
         }
-        for (int i = 0; i < vehicles.size(); i++) {
-            canvas.drawBitmap(vehicles.get(i).getCar(vehicles.get(i).getVehicleFrame()),
-                    vehicles.get(i).getVehicleX(), vehicles.get(i).getVehicleY(), null);
-            canvas.drawBitmap(mediumCars.get(i).getMediumCar(mediumCars.get(i).getVehicleFrame()),
-                    mediumCars.get(i).getVehicleX(), mediumCars.get(i).getVehicleY(), null);
-            canvas.drawBitmap(largeCars.get(i).getLargeCar(largeCars.get(i).getVehicleFrame()),
-                    largeCars.get(i).getVehicleX(), largeCars.get(i).getVehicleY(), null);
-            canvas.drawBitmap(logs.get(i).getLog(logs.get(i).getLogFrame()),
-                    logs.get(i).getLogX(), logs.get(i).getLogY(), null);
-            canvas.drawBitmap(logs2.get(i).getLog(logs2.get(i).getLogFrame()),
-                    logs2.get(i).getLogX(), logs2.get(i).getLogY(), null);
-            canvas.drawBitmap(logs3.get(i).getLog(logs3.get(i).getLogFrame()),
-                    logs3.get(i).getLogX(), logs3.get(i).getLogY(), null);
-            canvas.drawBitmap(smallLogs.get(i).getLog(smallLogs.get(i).getLogFrame()),
-                    smallLogs.get(i).getLogX(), smallLogs.get(i).getLogY(), null);
-            canvas.drawBitmap(smallLogs2.get(i).getLog(smallLogs2.get(i).getLogFrame()),
-                    smallLogs2.get(i).getLogX(), smallLogs2.get(i).getLogY(), null);
-            canvas.drawBitmap(smallLogs3.get(i).getLog(smallLogs3.get(i).getLogFrame()),
-                    smallLogs3.get(i).getLogX(), smallLogs3.get(i).getLogY(), null);
-            canvas.drawBitmap(smallLogs4.get(i).getLog(smallLogs4.get(i).getLogFrame()),
-                    smallLogs4.get(i).getLogX(), smallLogs4.get(i).getLogY(), null);
-            canvas.drawBitmap(smallLogs5.get(i).getLog(smallLogs5.get(i).getLogFrame()),
-                    smallLogs5.get(i).getLogX(), smallLogs5.get(i).getLogY(), null);
-            mediumCars.get(i).setVehicleFrame(mediumCars.get(i).getVehicleFrame() + 1);
-            vehicles.get(i).setVehicleFrame(vehicles.get(i).getVehicleFrame() + 1);
-            largeCars.get(i).setVehicleFrame(largeCars.get(i).getVehicleFrame() + 1);
-            logs.get(i).setLogFrame(logs.get(i).getLogFrame() + 1);
-            logs2.get(i).setLogFrame(logs2.get(i).getLogFrame() + 1);
-            logs3.get(i).setLogFrame(logs3.get(i).getLogFrame() + 1);
-            smallLogs.get(i).setLogFrame(smallLogs.get(i).getLogFrame() + 1);
-            smallLogs2.get(i).setLogFrame(smallLogs2.get(i).getLogFrame() + 1);
-            smallLogs3.get(i).setLogFrame(smallLogs3.get(i).getLogFrame() + 1);
-            smallLogs4.get(i).setLogFrame(smallLogs4.get(i).getLogFrame() + 1);
-            smallLogs5.get(i).setLogFrame(smallLogs5.get(i).getLogFrame() + 1);
-            if (vehicles.get(i).getVehicleFrame() > 2) {
-                vehicles.get(i).setVehicleFrame(0);
-            }
-            if (mediumCars.get(i).getVehicleFrame() > 2) {
-                mediumCars.get(i).setVehicleFrame(0);
-            }
-            if (largeCars.get(i).getVehicleFrame() > 2) {
-                largeCars.get(i).setVehicleFrame(0);
-            }
-            if (logs.get(i).getLogFrame() > 2) {
-                logs.get(i).setLogFrame(0);
-            }
-            if (logs2.get(i).getLogFrame() > 2) {
-                logs2.get(i).setLogFrame(0);
-            }
-            if (logs3.get(i).getLogFrame() > 2) {
-                logs3.get(i).setLogFrame(0);
-            }
-            if (smallLogs.get(i).getLogFrame() > 2) {
-                smallLogs.get(i).setLogFrame(0);
-            }
-            if (smallLogs2.get(i).getLogFrame() > 2) {
-                smallLogs2.get(i).setLogFrame(0);
-            }
-            if (smallLogs3.get(i).getLogFrame() > 2) {
-                smallLogs3.get(i).setLogFrame(0);
-            }
-            if (smallLogs4.get(i).getLogFrame() > 2) {
-                smallLogs4.get(i).setLogFrame(0);
-            }
-            if (smallLogs5.get(i).getLogFrame() > 2) {
-                smallLogs5.get(i).setLogFrame(0);
-            }
-            vehicles.get(i).setVehicleX(vehicles.get(i).getVehicleX()
-                    - vehicles.get(i).getVehicleVelocity());
-            mediumCars.get(i).setVehicleX(mediumCars.get(i).getVehicleX()
-                    - mediumCars.get(i).getVehicleVelocity());
-            largeCars.get(i).setVehicleX(largeCars.get(i).getVehicleX()
-                    + largeCars.get(i).getVehicleVelocity());
-            logs.get(i).setLogX(logs.get(i).getLogX() - logs.get(i).getLogVelocity());
-            logs2.get(i).setLogX(logs2.get(i).getLogX() - logs2.get(i).getLogVelocity());
-            logs3.get(i).setLogX(logs3.get(i).getLogX() + logs3.get(i).getLogVelocity());
-            smallLogs.get(i).setLogX(smallLogs.get(i).getLogX()
-                   - smallLogs.get(i).getLogVelocity());
-            smallLogs2.get(i).setLogX(smallLogs2.get(i).getLogX()
-                   + smallLogs2.get(i).getLogVelocity());
-            smallLogs3.get(i).setLogX(smallLogs3.get(i).getLogX()
-                   + smallLogs3.get(i).getLogVelocity());
-            smallLogs4.get(i).setLogX(smallLogs4.get(i).getLogX()
-                    - smallLogs4.get(i).getLogVelocity());
-            smallLogs5.get(i).setLogX(smallLogs5.get(i).getLogX()
-                    + smallLogs5.get(i).getLogVelocity());
-            if (vehicles.get(i).getVehicleX() < -vehicles.get(i).getCarWidth()) {
-                vehicles.get(i).resetPosition();
-            }
-            if (mediumCars.get(i).getVehicleX() < -mediumCars.get(i).getMediumCarWidth()) {
-                mediumCars.get(i).resetPosition();
-            }
-            if (largeCars.get(i).getVehicleX() > deviceWidth) {
-                largeCars.get(i).resetPosition();
-            }
-            if (logs.get(i).getLogX() < -logs.get(i).getLogWidth()) {
-                logs.get(i).resetPosition();
-            }
-            if (logs2.get(i).getLogX() < -logs2.get(i).getLogWidth()) {
-                logs2.get(i).resetPosition2();
-            }
-            if (logs3.get(i).getLogX() > deviceWidth) {
-                logs3.get(i).resetPosition3();
-            }
-            if (smallLogs.get(i).getLogX() < -smallLogs.get(i).getLogWidth()) {
-                smallLogs.get(i).resetPosition();
-            }
-            if (smallLogs2.get(i).getLogX() > deviceWidth) {
-                smallLogs2.get(i).resetPosition2();
-            }
-            if (smallLogs3.get(i).getLogX() > deviceWidth) {
-                smallLogs3.get(i).resetPosition3();
-            }
-            if (smallLogs4.get(i).getLogX() < -smallLogs4.get(i).getLogWidth()) {
-                smallLogs4.get(i).resetPosition4();
-            }
-            if (smallLogs5.get(i).getLogX() > deviceWidth) {
-                smallLogs5.get(i).resetPosition5();
-            }
+    }
+
+    public void drawActions2(int i, Canvas canvas, ArrayList<Vehicle> vehicles, 
+        ArrayList<MediumCar> mediumCars, ArrayList<LargeCar> largeCars, ArrayList<Log> logs, 
+        ArrayList<Log> logs2, ArrayList<Log> logs3, ArrayList<SmallLog> smallLogs, 
+        ArrayList<SmallLog> smallLogs2, ArrayList<SmallLog> smallLogs3, ArrayList<SmallLog> smallLogs4, 
+        ArrayList<SmallLog> smallLogs5) {
+        canvas.drawBitmap(vehicles.get(i).getCar(vehicles.get(i).getVehicleFrame()), 
+                vehicles.get(i).getVehicleX(), vehicles.get(i).getVehicleY(), null);
+        canvas.drawBitmap(mediumCars.get(i).getMediumCar(mediumCars.get(i).getVehicleFrame()), 
+                mediumCars.get(i).getVehicleX(), mediumCars.get(i).getVehicleY(), null);
+        canvas.drawBitmap(largeCars.get(i).getLargeCar(largeCars.get(i).getVehicleFrame()),
+                largeCars.get(i).getVehicleX(), largeCars.get(i).getVehicleY(), null);
+
+        drawRegularLogs(i, canvas, logs, logs2, logs3);
+        drawSmallLogs(i, canvas, smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+
+    }
+
+    public void drawRegularLogs(int i, Canvas canvas, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3) {
+        canvas.drawBitmap(logs.get(i).getLog(logs.get(i).getLogFrame()),
+                logs.get(i).getLogX(), logs.get(i).getLogY(), null);
+        canvas.drawBitmap(logs2.get(i).getLog(logs2.get(i).getLogFrame()),
+                logs2.get(i).getLogX(), logs2.get(i).getLogY(), null);
+        canvas.drawBitmap(logs3.get(i).getLog(logs3.get(i).getLogFrame()),
+                logs3.get(i).getLogX(), logs3.get(i).getLogY(), null);
+    }
+
+    public void drawSmallLogs(int i, Canvas canvas, ArrayList<SmallLog> smallLogs, 
+        ArrayList<SmallLog> smallLogs2, ArrayList<SmallLog> smallLogs3, ArrayList<SmallLog> smallLogs4, 
+        ArrayList<SmallLog> smallLogs5) {
+        canvas.drawBitmap(smallLogs.get(i).getLog(smallLogs.get(i).getLogFrame()),
+                smallLogs.get(i).getLogX(), smallLogs.get(i).getLogY(), null);
+        canvas.drawBitmap(smallLogs2.get(i).getLog(smallLogs2.get(i).getLogFrame()),
+                smallLogs2.get(i).getLogX(), smallLogs2.get(i).getLogY(), null);
+        canvas.drawBitmap(smallLogs3.get(i).getLog(smallLogs3.get(i).getLogFrame()),
+                smallLogs3.get(i).getLogX(), smallLogs3.get(i).getLogY(), null);
+        canvas.drawBitmap(smallLogs4.get(i).getLog(smallLogs4.get(i).getLogFrame()),
+                smallLogs4.get(i).getLogX(), smallLogs4.get(i).getLogY(), null);
+        canvas.drawBitmap(smallLogs5.get(i).getLog(smallLogs5.get(i).getLogFrame()),
+                smallLogs5.get(i).getLogX(), smallLogs5.get(i).getLogY(), null);
+    }
+
+    public void setVehicleLogActions(int i, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars,
+        ArrayList<LargeCar> largeCars, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3, 
+        ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, ArrayList<SmallLog> smallLogs3,
+        ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5) {
+        mediumCars.get(i).setVehicleFrame(mediumCars.get(i).getVehicleFrame() + 1);
+        vehicles.get(i).setVehicleFrame(vehicles.get(i).getVehicleFrame() + 1);
+        largeCars.get(i).setVehicleFrame(largeCars.get(i).getVehicleFrame() + 1);
+        logs.get(i).setLogFrame(logs.get(i).getLogFrame() + 1);
+        logs2.get(i).setLogFrame(logs2.get(i).getLogFrame() + 1);
+        logs3.get(i).setLogFrame(logs3.get(i).getLogFrame() + 1);
+        smallLogs.get(i).setLogFrame(smallLogs.get(i).getLogFrame() + 1);
+        smallLogs2.get(i).setLogFrame(smallLogs2.get(i).getLogFrame() + 1);
+        smallLogs3.get(i).setLogFrame(smallLogs3.get(i).getLogFrame() + 1);
+        smallLogs4.get(i).setLogFrame(smallLogs4.get(i).getLogFrame() + 1);
+        smallLogs5.get(i).setLogFrame(smallLogs5.get(i).getLogFrame() + 1);        
+    }
+
+    public void setVehicleFrame(int i, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars, ArrayList<LargeCar> largeCars) {
+        if (vehicles.get(i).getVehicleFrame() > 2) {
+            vehicles.get(i).setVehicleFrame(0);
         }
-        canvas.drawBitmap(frog, newFrog.getFrogX(), newFrog.getFrogY(), null);
+        if (mediumCars.get(i).getVehicleFrame() > 2) {
+            mediumCars.get(i).setVehicleFrame(0);
+        }
+        if (largeCars.get(i).getVehicleFrame() > 2) {
+            largeCars.get(i).setVehicleFrame(0);
+        }
+    }
+
+    public void setRegularLogFrame(int i, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3) {
+        if (logs.get(i).getLogFrame() > 2) {
+            logs.get(i).setLogFrame(0);
+        }
+        if (logs2.get(i).getLogFrame() > 2) {
+            logs2.get(i).setLogFrame(0);
+        }
+        if (logs3.get(i).getLogFrame() > 2) {
+            logs3.get(i).setLogFrame(0);
+        }
+    }
+
+    public void setSmallLogFrame(int i, ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, 
+        ArrayList<SmallLog> smallLogs3, ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5) {
+        if (smallLogs.get(i).getLogFrame() > 2) {
+            smallLogs.get(i).setLogFrame(0);
+        }
+        if (smallLogs2.get(i).getLogFrame() > 2) {
+            smallLogs2.get(i).setLogFrame(0);
+        }
+        if (smallLogs3.get(i).getLogFrame() > 2) {
+            smallLogs3.get(i).setLogFrame(0);
+        }
+        if (smallLogs4.get(i).getLogFrame() > 2) {
+            smallLogs4.get(i).setLogFrame(0);
+        }
+        if (smallLogs5.get(i).getLogFrame() > 2) {
+            smallLogs5.get(i).setLogFrame(0);
+        }
+    }
+
+    public void setVehicleXValues(int i, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars, ArrayList<LargeCar> largeCars) {
+        vehicles.get(i).setVehicleX(vehicles.get(i).getVehicleX()
+                - vehicles.get(i).getVehicleVelocity());
+        mediumCars.get(i).setVehicleX(mediumCars.get(i).getVehicleX()
+                - mediumCars.get(i).getVehicleVelocity());
+        largeCars.get(i).setVehicleX(largeCars.get(i).getVehicleX()
+                + largeCars.get(i).getVehicleVelocity());
+    }
+
+    public void setRegularLogXValues(int i, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3) {
+        logs.get(i).setLogX(logs.get(i).getLogX() - logs.get(i).getLogVelocity());
+        logs2.get(i).setLogX(logs2.get(i).getLogX() - logs2.get(i).getLogVelocity());
+        logs3.get(i).setLogX(logs3.get(i).getLogX() + logs3.get(i).getLogVelocity());
+    }
+
+    public void setSmallLogXValues(int i, ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, 
+        ArrayList<SmallLog> smallLogs3, ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5) {
+        smallLogs.get(i).setLogX(smallLogs.get(i).getLogX()
+                - smallLogs.get(i).getLogVelocity());
+        smallLogs2.get(i).setLogX(smallLogs2.get(i).getLogX()
+                + smallLogs2.get(i).getLogVelocity());
+        smallLogs3.get(i).setLogX(smallLogs3.get(i).getLogX()
+                + smallLogs3.get(i).getLogVelocity());
+        smallLogs4.get(i).setLogX(smallLogs4.get(i).getLogX()
+                - smallLogs4.get(i).getLogVelocity());
+        smallLogs5.get(i).setLogX(smallLogs5.get(i).getLogX()
+                + smallLogs5.get(i).getLogVelocity());
+    }
+
+    public void setVehiclePositions(int i, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars, ArrayList<LargeCar> largeCars) {
+        if (vehicles.get(i).getVehicleX() < -vehicles.get(i).getCarWidth()) {
+            vehicles.get(i).resetPosition();
+        }
+        if (mediumCars.get(i).getVehicleX() < -mediumCars.get(i).getMediumCarWidth()) {
+            mediumCars.get(i).resetPosition();
+        }
+        if (largeCars.get(i).getVehicleX() > deviceWidth) {
+            largeCars.get(i).resetPosition();
+        }
+    }
+
+    public void setRegularLogPositions(int i, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3) {
+       if (logs.get(i).getLogX() < -logs.get(i).getLogWidth()) {
+            logs.get(i).resetPosition();
+        }
+        if (logs2.get(i).getLogX() < -logs2.get(i).getLogWidth()) {
+            logs2.get(i).resetPosition2();
+        }
+        if (logs3.get(i).getLogX() > deviceWidth) {
+            logs3.get(i).resetPosition3();
+        }
+    }
+
+    public void setSmallLogPositions(int i, ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, 
+        ArrayList<SmallLog> smallLogs3, ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5) {
+        if (smallLogs.get(i).getLogX() < -smallLogs.get(i).getLogWidth()) {
+            smallLogs.get(i).resetPosition();
+        }
+        if (smallLogs2.get(i).getLogX() > deviceWidth) {
+            smallLogs2.get(i).resetPosition2();
+        }
+        if (smallLogs3.get(i).getLogX() > deviceWidth) {
+            smallLogs3.get(i).resetPosition3();
+        }
+        if (smallLogs4.get(i).getLogX() < -smallLogs4.get(i).getLogWidth()) {
+            smallLogs4.get(i).resetPosition4();
+        }
+        if (smallLogs5.get(i).getLogX() > deviceWidth) {
+            smallLogs5.get(i).resetPosition5();
+        }
+    }
+
+    public void movementActions(Canvas canvas, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars,
+        ArrayList<LargeCar> largeCars, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3, 
+        ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, ArrayList<SmallLog> smallLogs3,
+        ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5) {
+        for (int i = 0; i < vehicles.size(); i++) {
+                drawActions2(i, canvas, vehicles, mediumCars, largeCars, logs, logs2, logs3, 
+                    smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+                setVehicleLogActions(i, vehicles, mediumCars, largeCars, logs, logs2, logs3, 
+                    smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+                setFrames(i, vehicles, mediumCars, largeCars, logs, logs2, logs3, 
+                    smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+                setXValues(i, vehicles, mediumCars, largeCars, logs, logs2, logs3, 
+                    smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+                setPositions(i, vehicles, mediumCars, largeCars, logs, logs2, logs3, 
+                    smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+            }
+    }
+
+    public void setFrames(int i, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars,
+        ArrayList<LargeCar> largeCars, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3, 
+        ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, ArrayList<SmallLog> smallLogs3,
+        ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5) {
+        setVehicleFrame(i, vehicles, mediumCars, largeCars);
+        setRegularLogFrame(i, logs, logs2, logs3);
+        setSmallLogFrame(i,smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+    }
+
+    public void setXValues(int i, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars,
+        ArrayList<LargeCar> largeCars, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3, 
+        ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, ArrayList<SmallLog> smallLogs3,
+        ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5) {
+        setVehicleXValues(i, vehicles, mediumCars, largeCars);
+        setRegularLogXValues(i, logs, logs2, logs3);
+        setSmallLogXValues(i,smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+    }
+
+    public void setPositions(int i, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars,
+        ArrayList<LargeCar> largeCars, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3, 
+        ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, ArrayList<SmallLog> smallLogs3,
+        ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5) {
+        setVehiclePositions(i, vehicles, mediumCars, largeCars);
+        setRegularLogPositions(i, logs, logs2, logs3);
+        setSmallLogPositions(i,smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+    }
+
+    public void vehicleCollision(ArrayList<Vehicle> vehicles, Frog newFrog) {
         for (int i = 0; i < vehicles.size(); i++) {
             if (checkVehicleCollision(vehicles.get(i).getVehicleX(), vehicles.get(i).getVehicleY(),
-                    vehicles.get(i).getCarWidth(), vehicles.get(i).getCarHeight(),
-                    newFrog.getFrogX(), newFrog.getFrogY())) {
+                vehicles.get(i).getCarWidth(), vehicles.get(i).getCarHeight(),
+                newFrog.getFrogX(), newFrog.getFrogY())) {
                 updateLives();
             }
         }
+    }
+
+    public void mediumCarCollision(ArrayList<MediumCar> mediumCars, Frog newFrog) {
         for (int i = 0; i < mediumCars.size(); i++) {
             if (checkVehicleCollision(mediumCars.get(i).getVehicleX(),
-                    mediumCars.get(i).getVehicleY(), mediumCars.get(i).getMediumCarWidth(),
-                    mediumCars.get(i).getMediumCarHeight(), newFrog.getFrogX(),
-                    newFrog.getFrogY())) {
+                mediumCars.get(i).getVehicleY(), mediumCars.get(i).getMediumCarWidth(),
+                mediumCars.get(i).getMediumCarHeight(), newFrog.getFrogX(),
+                newFrog.getFrogY())) {
                 updateLives();
             }
         }
+    }
+
+    public void largeCarCollision(ArrayList<LargeCar> largeCars, Frog newFrog) {
         for (int i = 0; i < largeCars.size(); i++) {
             if (checkVehicleCollision(largeCars.get(i).getVehicleX(),
                     largeCars.get(i).getVehicleY(), largeCars.get(i).getLargeCarWidth(),
@@ -316,7 +438,9 @@ public class GameView extends View {
                 updateLives();
             }
         }
-        onLog = false;
+    }
+
+    public void regularLogCollision(ArrayList<Log> logs, Frog newFrog) {
         for (int i = 0; i < logs.size(); i++) {
             if (checkLogCollision(logs.get(i).getLogX(), logs.get(i).getLogY(),
                     logs.get(i).getLogWidth(),
@@ -325,44 +449,16 @@ public class GameView extends View {
                 if (newFrog.moveFrogLeftLog(newFrog.getFrogX()
                         - logs.get(i).getLogVelocity())) {
                     newFrog.moveFrogLeft(newFrog.getFrogX()
-                            - logs.get(i).getLogVelocity());
+                        - logs.get(i).getLogVelocity());
                 } else {
                     updateLives();
                 }
                 break;
             }
         }
-        for (int i = 0; i < logs2.size(); i++) {
-            if (checkLogCollision(logs2.get(i).getLogX(), logs2.get(i).getLogY(),
-                    logs2.get(i).getLogWidth(),
-                    logs2.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
-                onLog = true;
-                if (newFrog.moveFrogLeftLog(newFrog.getFrogX()
-                        - logs2.get(i).getLogVelocity())) {
-                    newFrog.moveFrogLeft(newFrog.getFrogX()
-                            - logs2.get(i).getLogVelocity());
-                } else {
-                    updateLives();
-                }
-                break;
-            }
-        }
-        for (int i = 0; i < logs3.size(); i++) {
-            if (checkLogCollision(logs3.get(i).getLogX(), logs3.get(i).getLogY(),
-                    logs3.get(i).getLogWidth(),
-                    logs3.get(i).getLogHeight(), newFrog.getFrogX(),
-                    newFrog.getFrogY())) {
-                onLog = true;
-                if (newFrog.moveFrogRightLog(newFrog.getFrogX()
-                        + logs3.get(i).getLogVelocity())) {
-                    newFrog.moveFrogRight(newFrog.getFrogX()
-                            + logs3.get(i).getLogVelocity());
-                } else {
-                    updateLives();
-                }
-                break;
-            }
-        }
+    }
+
+    public void smallLogCollision(ArrayList<SmallLog> smallLogs, Frog newFrog) {
         for (int i = 0; i < smallLogs.size(); i++) {
             if (checkLogCollision(smallLogs.get(i).getLogX(), smallLogs.get(i).getLogY(),
                     smallLogs.get(i).getLogWidth(),
@@ -379,65 +475,23 @@ public class GameView extends View {
                 break;
             }
         }
-        for (int i = 0; i < smallLogs2.size(); i++) {
-            if (checkLogCollision(smallLogs2.get(i).getLogX(), smallLogs2.get(i).getLogY(),
-                    smallLogs2.get(i).getLogWidth(),
-                    smallLogs2.get(i).getLogHeight(), newFrog.getFrogX(), newFrog.getFrogY())) {
-                onLog = true;
-                if (newFrog.moveFrogRightLog(newFrog.getFrogX()
-                        + smallLogs2.get(i).getLogVelocity())) {
-                    newFrog.moveFrogRight(newFrog.getFrogX()
-                            + smallLogs2.get(i).getLogVelocity());
-                } else {
-                    updateLives();
-                }
-                break;
-            }
-        }
-        for (int i = 0; i < smallLogs3.size(); i++) {
-            if (checkLogCollision(smallLogs3.get(i).getLogX(), smallLogs3.get(i).getLogY(),
-                    smallLogs3.get(i).getLogWidth(),
-                    smallLogs3.get(i).getLogHeight(), newFrog.getFrogX(),
-                    newFrog.getFrogY())) {
-                onLog = true;
-                if (newFrog.moveFrogRightLog(newFrog.getFrogX()
-                        + smallLogs3.get(i).getLogVelocity())) {
-                    newFrog.moveFrogRight(newFrog.getFrogX()
-                            + smallLogs3.get(i).getLogVelocity());
-                } else {
-                    updateLives();
-                }
-                break;
-            }
-            if (checkLogCollision(smallLogs4.get(i).getLogX(), smallLogs4.get(i).getLogY(),
-                    smallLogs4.get(i).getLogWidth(),
-                    smallLogs4.get(i).getLogHeight(), newFrog.getFrogX(),
-                    newFrog.getFrogY())) {
-                onLog = true;
-                if (newFrog.moveFrogLeftLog(newFrog.getFrogX()
-                        - smallLogs4.get(i).getLogVelocity())) {
-                    newFrog.moveFrogLeft(newFrog.getFrogX()
-                            - smallLogs4.get(i).getLogVelocity());
-                } else {
-                    updateLives();
-                }
-                break;
-            }
-            if (checkLogCollision(smallLogs5.get(i).getLogX(), smallLogs5.get(i).getLogY(),
-                    smallLogs5.get(i).getLogWidth(),
-                    smallLogs5.get(i).getLogHeight(), newFrog.getFrogX(),
-                    newFrog.getFrogY())) {
-                onLog = true;
-                if (newFrog.moveFrogRightLog(newFrog.getFrogX()
-                        + smallLogs5.get(i).getLogVelocity())) {
-                    newFrog.moveFrogRight(newFrog.getFrogX()
-                            + smallLogs5.get(i).getLogVelocity());
-                } else {
-                    updateLives();
-                }
-                break;
-            }
-        }
+    }
+
+    public void logCollisionHandler(Frog newFrog, ArrayList<Log> logs, ArrayList<Log> logs2, 
+            ArrayList<Log> logs3, ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, 
+            ArrayList<SmallLog> smallLogs3, ArrayList<SmallLog> smallLogs4, 
+            ArrayList<SmallLog> smallLogs5) {
+        regularLogCollision(logs, newFrog);
+        regularLogCollision(logs2, newFrog);  
+        regularLogCollision(logs3, newFrog);  
+        smallLogCollision(smallLogs, newFrog);
+        smallLogCollision(smallLogs2, newFrog);
+        smallLogCollision(smallLogs3, newFrog);
+        smallLogCollision(smallLogs4, newFrog);
+        smallLogCollision(smallLogs5, newFrog);
+    }
+
+    public void collisionUpdateLives(Frog newFrog, MediumCar newMediumCar, ArrayList<MediumCar> mediumCars, MediumCar newMediumCar2) {
         if (!onLog && checkCollision(newFrog.getFrogY())) {
             updateLives();
         }
@@ -451,6 +505,9 @@ public class GameView extends View {
                 newFrog.getFrogX(), newFrog.getFrogY())) {
             updateLives();
         }
+    }
+
+    public void drawActions3(Canvas canvas, Frog newFrog, PlayerConfig PlayerConfig, Handler handler) {
         canvas.drawText(globalDifficulty, 20, textSize, textPaint);
         canvas.drawText("Lives: " + lives, deviceWidth / 2, textSize, textPaint);
         canvas.drawText("Score: " + newFrog.getScore(), deviceWidth / 2,
@@ -458,6 +515,22 @@ public class GameView extends View {
         canvas.drawText(PlayerConfig.getPlayerName(), 20, textSize * 2, textPaint);
         handler.postDelayed(runnable, updateMillis);
     }
+
+    public void movementActions2(Frog newFrog, ArrayList<Vehicle> vehicles, ArrayList<MediumCar> mediumCars,
+        ArrayList<LargeCar> largeCars, ArrayList<Log> logs, ArrayList<Log> logs2, ArrayList<Log> logs3, 
+        ArrayList<SmallLog> smallLogs, ArrayList<SmallLog> smallLogs2, ArrayList<SmallLog> smallLogs3,
+        ArrayList<SmallLog> smallLogs4, ArrayList<SmallLog> smallLogs5, MediumCar newMediumCar, 
+        MediumCar newMediumCar2, Canvas canvas, PlayerConfig PlayerConfig, Handler handler) {
+        vehicleCollision(vehicles, newFrog);
+        mediumCarCollision(mediumCars, newFrog);
+        largeCarCollision(largeCars, newFrog);
+        onLog = false;
+        logCollisionHandler(newFrog, logs, logs2, logs3, smallLogs, smallLogs2, smallLogs3, smallLogs4, smallLogs5);
+        collisionUpdateLives(newFrog, newMediumCar, mediumCars, newMediumCar2);
+        drawActions3(canvas, newFrog, PlayerConfig, handler);
+    }
+
+
 
     public String getGlobalDifficulty() {
         return globalDifficulty;
